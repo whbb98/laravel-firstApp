@@ -9,10 +9,13 @@
     <link rel="stylesheet" href="assets/css/all.min.css">
     <script defer src="assets/js/bootstrap.bundle.min.js"></script>
     <script defer src="assets/js/jquery-3.7.0.min.js"></script>
-    {{------------------------------------------------------}}
-    <title>Doctor AI Collab</title>
+    {{------------including annotorious lib--------------------}}
+    <link rel="stylesheet" href="/assets/css/annotorious.min.css">
+    <script defer src="assets/js/annotorious.min.js"></script>
+    {{---------------------------------------------------------}}
+    <title>Blog View</title>
 </head>
 <body>
-    <h1>Welcome to doctor AI Collab</h1>
+    
 </body>
 </html>

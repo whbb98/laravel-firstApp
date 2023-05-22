@@ -10,9 +10,9 @@
     <script defer src="assets/js/bootstrap.bundle.min.js"></script>
     <script defer src="assets/js/jquery-3.7.0.min.js"></script>
     {{------------------------------------------------------}}
-    <title>Doctor AI Collab</title>
+    <title>My Profile</title>
 </head>
 <body>
-    <h1>Welcome to doctor AI Collab</h1>
+    
 </body>
 </html>
