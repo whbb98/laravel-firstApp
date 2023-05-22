@@ -16,6 +16,6 @@
     <title>Blog View</title>
 </head>
 <body>
-    
+
 </body>
 </html>
