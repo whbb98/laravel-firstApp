@@ -1,0 +1,50 @@
+:root {
+    --custom-dark: #282a35;
+    --custom-primary: #04aa6d;
+    --custom-secondary: #d9eee1;
+    --custom-gray: #888888;
+    --custom-light: #e7e9eb;
+    --custom-warning: #f0735a;
+}
+
+.btn-outline-custom-primary:hover {
+    color: white !important;
+}
+nav ul li:hover {
+    border-bottom: 2px solid var(--custom-primary, #04aa6d);
+    font-weight: bold;
+}
+
+.partners img {
+    /* filter: grayscale(); */
+}
+
+.goals {
+    background-image: url("http://doctoraicollab.test/assets/img/radiologist.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.goals .goal:hover {
+    opacity: 1 !important;
+    cursor: help;
+}
+
+.goals .goal {
+    align-items: center;
+}
+
+.our-team img{
+    width: 100%;
+    height: 100%;
+}
+
+footer i{
+    color:var(--custom-primary)
+}
+footer .info p{
+    line-height: 2em;
+}
+footer ul li{
+    margin-bottom: 10px;
+}
