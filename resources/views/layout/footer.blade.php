@@ -5,7 +5,7 @@
             <div class="row justify-content-between">
                 <div class="info col-lg-4">
                     <h5 class="text-uppercase text-custom-primary">doctor ai collab</h5>
-                    <p>'Doctor AI Collab' Web App Dedicated To Doctors Especially Those Who Are Focusing On Medical
+                    <p><b>Doctor AI Collab</b> Web App Dedicated To Doctors Especially Those Who Are Focusing On Medical
                         Diagnosis And
                         They Want To Enhance Their Reports In Collaboration With Other Experts From Different Hospitals
                     </p>
