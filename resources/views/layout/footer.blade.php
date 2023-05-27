@@ -1,6 +1,6 @@
 @section('footer')
     {{-- start footer --}}
-    <footer class="bg-custom-dark text-white p-5">
+    <footer id="footer" class="bg-custom-dark text-white p-5">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="info col-lg-4">

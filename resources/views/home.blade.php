@@ -37,16 +37,16 @@
                             aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="#">Features</a>
+                        <a class="nav-link " aria-current="page" href="#features">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="#">Doctors</a>
+                        <a class="nav-link " aria-current="page" href="#our-team">Doctors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="#">Contact Us</a>
+                        <a class="nav-link " aria-current="page" href="#footer">Contact Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="#">About</a>
+                        <a class="nav-link " aria-current="page" href="#footer">About</a>
                     </li>
                 </ul>
                 <a href="/login" class="btn btn-outline-custom-primary text-custom-primary rounded-pill">Login</a>
@@ -82,7 +82,7 @@
     {{-- end partners --}}
 
     {{-- start features --}}
-    <div class="features container mt-5 text-center">
+    <div id="features" class="features container mt-5 text-center">
         <h2 class="text-custom-primary text-uppercase fw-bold">features</h2>
         <div class="row justify-content-center">
             <div class="feat mx-sm-auto mx-lg-1 col-8 bg-custom-secondary col-md-5 col-lg-3 mt-4 p-4 rounded-4">
@@ -168,7 +168,7 @@
     {{-- end goals --}}
 
     {{-- start our team --}}
-    <div class="our-team container mt-5">
+    <div id="our-team" class="our-team container mt-5">
         <h2 class="text-center text-custom-primary text-uppercase fw-bold">our team</h2>
         <div class="row justify-content-center">
             {{-- start doctor card --}}

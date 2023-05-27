@@ -28,20 +28,12 @@ Route::get("/signup", function () {
 //++++++++++++++++++</ public routes >++++++++++++++++++
 
 //++++++++++++++++++< user routes >++++++++++++++++++
-Route::get("/blog", function () {
-    return view("user.blog");
-});
-
-Route::get("/blogs", function () {
-    return view("user.blogs");
-});
-
 Route::get("/home", function () {
     return view("user.home");
 });
 
-Route::get("/meetings", function () {
-    return view("user.meetings");
+Route::get("/profile", function () {
+    return view("user.profile");
 });
 
 Route::get("/messages", function () {
@@ -52,9 +44,22 @@ Route::get("/notifications", function () {
     return view("user.notifications");
 });
 
-Route::get("/profile", function () {
-    return view("user.profile");
+Route::get("/blogs", function () {
+    return view("user.blogs");
 });
+
+Route::get("/blog", function () {
+    return view("user.blog");
+});
+
+Route::get("/meetings", function () {
+    return view("user.meetings");
+});
+
+Route::get("/meeting", function () {
+    return view("user.meeting");
+});
+
 //++++++++++++++++++< user routes >++++++++++++++++++
 
 
