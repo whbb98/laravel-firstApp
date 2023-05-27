@@ -15,9 +15,9 @@
     <link rel="icon" type="image/x-icon" href="logo.svg">
     <title>Account Login</title>
     <style>
-    .brand .logo{
-        width: 150px
-    }
+        .brand .logo {
+            width: 150px
+        }
     </style>
 </head>
 
@@ -35,8 +35,8 @@
                 <span class="input-group-text bg-custom-primary text-custom-dark" id="addon-wrapping">
                     <i class="fa-solid fa-user"></i>
                 </span>
-                <input name="email" type="text" class="form-control" placeholder="Username or Email" aria-label="Username"
-                    aria-describedby="addon-wrapping">
+                <input name="email" type="text" class="form-control" placeholder="Username or Email"
+                    aria-label="Username" aria-describedby="addon-wrapping">
             </div>
             <div class="input-group flex-nowrap mb-4">
                 <span class="input-group-text bg-custom-primary text-custom-dark" id="addon-wrapping">
@@ -46,11 +46,11 @@
                     aria-describedby="addon-wrapping">
             </div>
             <button class="btn btn-custom-primary text-white" type="submit">Login</button>
+            <a href="" class="text-decoration-none">Password Reset</a>
+            or
+            <a href="/signup" class="text-decoration-none">New Account</a>
         </form>
     </div>
-
-
-
     @include('layout.footer')
 </body>
 
