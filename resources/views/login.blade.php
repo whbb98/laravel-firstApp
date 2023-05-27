@@ -11,7 +11,7 @@
     <script defer src="assets/js/bootstrap.bundle.min.js"></script>
     <script defer src="assets/js/jquery-3.7.0.min.js"></script>
     {{-- -------------------------------------------------- --}}
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/global.css">
     <link rel="icon" type="image/x-icon" href="logo.svg">
     <title>Account Login</title>
     <style>

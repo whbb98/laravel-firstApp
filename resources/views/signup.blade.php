@@ -11,7 +11,7 @@
     <script defer src="assets/js/bootstrap.bundle.min.js"></script>
     <script defer src="assets/js/jquery-3.7.0.min.js"></script>
     {{-- -------------------------------------------------- --}}
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/global.css">
     <link rel="icon" type="image/x-icon" href="logo.svg">
     <style>
         .brand .logo {
@@ -25,8 +25,8 @@
     <title>Create Account</title>
 </head>
 
-<body class="bg-custom-secondary py-5">
-    <div class="container row mw-100 vh-100 align-content-center justify-content-center">
+<body class="bg-custom-secondary pt-5">
+    <div class="container row my-5 mw-100 vh-100 align-content-center justify-content-center">
         <h1 class="text-center text-custom-primary mb-5">
             <a href="/"><img class="logo" src="logo.svg"></a>   Doctor New Account
         </h1>
