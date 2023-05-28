@@ -43,13 +43,13 @@
                 </div>
             </div>
             <hr class="border-bottom border-custom-primary opacity-100">
-            <div class="row justify-content-between">
-                <div class="copy col-lg-3">
+            <div class="row justify-content-between align-items-start">
+                <div class="col-lg-3 my-1">
                     <span class="text-uppercase">
                         doctor ai collab &copy; 2023
                     </span>
                 </div>
-                <div class="mt-2 copy col-lg-3">
+                <div class="col-lg-3">
                     <ul class="list-unstyled d-flex text-capitalize justify-content-between">
                         <li><a class="text-white text-decoration-none" href="/">home</a></li>
                         <li>terms</li>

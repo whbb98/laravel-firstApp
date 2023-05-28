@@ -15,6 +15,10 @@ nav ul li:hover {
     font-weight: bold;
 }
 
+.dropdown-menu .dropdown-item:active {
+    background-color: #04aa6d;
+}
+
 footer i {
     color: var(--custom-primary);
 }

@@ -11,12 +11,12 @@
     <script defer src="assets/js/bootstrap.bundle.min.js"></script>
     <script defer src="assets/js/jquery-3.7.0.min.js"></script>
     {{-- -------------------------------------------------- --}}
-    <link rel="icon" type="image/x-icon" href="{{$favicon_url}}">
+    <link rel="icon" type="image/x-icon" href="{{ $favicon_url }}">
     <link rel="stylesheet" href="assets/css/global.css">
     <title>@yield('title', 'default layout')</title>
 
     <style>
-        .left-nav ul li:nth-of-type({{$active_page_number }}) a {
+        .left-nav ul li:nth-of-type({{ $active_page_number }}) a {
             color: white !important;
             background-color: var(--custom-primary);
         }
@@ -35,7 +35,7 @@
                     <span class="fs-4 ms-2 text-capitalize text-custom-primary fw-bold">doctor ai collab</span>
                 </a>
                 <div class="user-nav-menu d-flex">
-                    {{-- dropdown 01 --}}
+                    {{-- language dropdown 01 --}}
                     <div class="dropdown text-end">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,7 +49,7 @@
                         </ul>
                     </div>
                     {{-- ----------------------- --}}
-                    {{-- dropdown 02 --}}
+                    {{-- push notifications dropdown 02 --}}
                     <div class="dropdown text-end ms-4">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -68,7 +68,7 @@
                         </ul>
                     </div>
                     {{-- ----------------------- --}}
-                    {{-- dropdown 03 --}}
+                    {{-- Messages  dropdown 03 --}}
                     <div class="dropdown text-end ms-4">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -86,7 +86,7 @@
                         </ul>
                     </div>
                     {{-- ----------------------- --}}
-                    {{-- dropdown 04 --}}
+                    {{-- User Menu dropdown 04 --}}
                     <div class="dropdown text-end ms-4">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -113,7 +113,7 @@
 
     {{-- start page content --}}
     <div class="container">
-        <div class="row">
+        <div class="row min-vh-100">
             <div class="left-nav col-2 col-sm-2 col-lg-2">
                 <ul class="list-unstyled">
                     <li class="fw-bold text-custom-primary mb-4">
@@ -165,6 +165,7 @@
             </div>
         </div>
     </div>
+    @extends('layout.footer')
     {{-- end page content --}}
 </body>
 

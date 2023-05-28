@@ -4,3 +4,4 @@
     $active_page_number = 2;
     $favicon_url = 'assets/favicons/profile-icon.svg';
 @endphp
+
