@@ -14,13 +14,13 @@
     <link rel="icon" type="image/x-icon" href="{{ $favicon_url }}">
     <link rel="stylesheet" href="assets/css/global.css">
     <title>@yield('title', 'default layout')</title>
-
     <style>
         .left-nav ul li:nth-of-type({{ $active_page_number }}) a {
             color: white !important;
             background-color: var(--custom-primary);
         }
     </style>
+    @yield('style')
 </head>
 
 <body>
