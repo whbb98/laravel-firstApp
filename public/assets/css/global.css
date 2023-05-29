@@ -23,6 +23,10 @@ nav ul li:hover {
     background-color: var(--custom-primary);
 }
 
+.form-check-input:checked {
+    background-color: var(--custom-primary);
+}
+
 footer i {
     color: var(--custom-primary);
 }
