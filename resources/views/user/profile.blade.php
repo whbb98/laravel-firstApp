@@ -11,6 +11,9 @@
             color: white;
             font-weight: bold;
         }
+        .ptr-cursor{
+            cursor: pointer;
+        }
     </style>
 @endsection
 

@@ -167,6 +167,7 @@
     </div>
     @extends('layout.footer')
     {{-- end page content --}}
+    <script src="{{ asset('assets/js/user-profile.js') }}"></script>
 </body>
 
 </html>
