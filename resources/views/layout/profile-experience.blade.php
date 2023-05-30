@@ -11,7 +11,7 @@
         @for ($i = 0; $i < 3; $i++)
             <tr>
                 <td>Master of Medecine</td>
-                <td>2017-2019</td>
+                <td>June 2020</td>
                 <td>CHU Hospital Oran</td>
             </tr>
         @endfor
@@ -31,7 +31,7 @@
         @for ($i = 0; $i < 3; $i++)
             <tr>
                 <td>Radiologist</td>
-                <td>2017-2019</td>
+                <td>Jul 2019</td>
                 <td>CHU Hospital Oran</td>
             </tr>
         @endfor
@@ -51,7 +51,7 @@
         @for ($i = 0; $i < 3; $i++)
             <tr>
                 <td>Top Radiologist Medal</td>
-                <td>2017-2019</td>
+                <td>May 2022</td>
                 <td>CHU Hospital Oran</td>
             </tr>
         @endfor

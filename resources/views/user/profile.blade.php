@@ -11,7 +11,8 @@
             color: white;
             font-weight: bold;
         }
-        .ptr-cursor{
+
+        .ptr-cursor {
             cursor: pointer;
         }
     </style>
@@ -66,23 +67,5 @@
             </div>
         </div>
     </div>
-    {{-- <<<<<<<<<<menu tabs --}}
-
-    {{-- <p class="bio">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem voluptates iure animi numquam voluptate!
-        Consectetur soluta optio reiciendis deleniti ipsam consequatur suscipit maxime cupiditate non, quidem quibusdam.
-        Quia, explicabo est?
-    </p> --}}
-
-    <div class="info">
-
-    </div>
-
-    <div class="followers">
-
-    </div>
-
-
-
 
 @endsection
