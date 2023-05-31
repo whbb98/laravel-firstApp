@@ -14,8 +14,17 @@
         .media img {
             height: 200px;
         }
-        .post-comments{
-            max-height: 300px
+
+        .post-comments {
+            max-height: 300px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .post-header img,
+        .post-comments img {
+            width: 100px;
+            /* height: 100px; */
         }
     </style>
 @endsection
@@ -45,7 +54,7 @@
     </div>
 
     <div class="posts text-custom-dark">
-        <div class="post">
+        <div id="user_post_1" class="post">
             <div class="row post-header align-items-center">
                 <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg" alt="user name"
                     class="col-3 col-md-2 col-lg-2 rounded-circle">
@@ -59,10 +68,10 @@
                     animi rerum ipsam pariatur obcaecati, dolorum alias quibusdam unde voluptas! Nobis eligendi voluptatem
                     hic eum culpa esse.</p>
                 <div class="row media bg-custom-secondary justify-content-around overflow-auto rounded">
-                    <img class="col-lg-5 my-2" src="https://picsum.photos/200/300" alt="img-1">
-                    <img class="col-lg-5 my-2" src="https://picsum.photos/500/300" alt="img-2">
-                    <img class="col-lg-5 my-2" src="https://picsum.photos/300/300" alt="img-3">
-                    <img class="col-lg-5 my-2" src="https://picsum.photos/800/500" alt="img-4">
+                    <img class="col-auto my-2 rounded" src="https://picsum.photos/500/300" alt="img-1">
+                    <img class="col-auto my-2 rounded" src="https://picsum.photos/500/500" alt="img-2">
+                    <img class="col-auto my-2 rounded" src="https://picsum.photos/300/600" alt="img-3">
+                    <img class="col-auto my-2 rounded" src="https://picsum.photos/800/500" alt="img-4">
                 </div>
             </div>
             <div class="post-footer">
@@ -93,8 +102,8 @@
                         </button>
                     </div>
                 </div>
-                <div id="post-comment-1" class="collapse post-comments overflow-auto">
-                    <div class="row my-2 user-comment align-items-center">
+                <div id="post-comment-1" class="collapse post-comments">
+                    <div class="row user-comment align-items-center">
                         <img class="col-3 col-lg-2 rounded-pill"
                             src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
                             alt="user img">
@@ -106,7 +115,7 @@
                             autem nesciunt harum, necessitatibus dolor, nemo laboriosam repudiandae unde quod ullam! Quia
                             porro aliquid repellat ea reiciendis. Perferendis, ipsum.</p>
                     </div>
-                    <div class="row my-2 user-comment align-items-center">
+                    <div class="row user-comment align-items-center">
                         <img class="col-3 col-lg-2 rounded-pill"
                             src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
                             alt="user img">
@@ -118,6 +127,12 @@
                             autem nesciunt harum, necessitatibus dolor, nemo laboriosam repudiandae unde quod ullam! Quia
                             porro aliquid repellat ea reiciendis. Perferendis, ipsum.</p>
                     </div>
+                    <form action="">
+                        <div class="input-group mb-4">
+                            <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Your Comment</span>
+                            <input name="comment" type="text" class="form-control" placeholder="Write Your Comment">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
