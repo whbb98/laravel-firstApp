@@ -160,14 +160,14 @@
                     </li>
                 </ul>
             </div>
-            <div class="page-content col-10 col-sm-10 col-lg-9 ">
+            <div class="page-content col-10 col-sm-10 col-lg-10">
                 @yield('page-content')
             </div>
         </div>
     </div>
     @extends('layout.footer')
     {{-- end page content --}}
-    <script src="{{ asset('assets/js/user-profile.js') }}"></script>
+    @yield('script')
 </body>
 
 </html>

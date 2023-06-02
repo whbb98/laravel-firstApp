@@ -44,7 +44,7 @@
             </div>
             <div class="input-group mt-2 align-items-center">
                 <input checked type="checkbox" name="post_visibility" class="form-check-input p-2 rounded">
-                <label class="mx-2" for="post_visibility">Visible to All</label>
+                <label class="mx-2">Visible to All</label>
                 <input name="post_file" type="file" class="form-control" id="file-input" multiple
                     accept=".jpg, .jpeg, .png, .pdf">
                 <button type="submit" class="btn btn-custom-primary text-white" type="button" id="share-button">Share
@@ -129,7 +129,8 @@
                     </div>
                     <form action="">
                         <div class="input-group mb-4">
-                            <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Your Comment</span>
+                            <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Your
+                                Comment</span>
                             <input name="comment" type="text" class="form-control" placeholder="Write Your Comment">
                         </div>
                     </form>
