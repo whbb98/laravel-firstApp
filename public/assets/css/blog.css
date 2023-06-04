@@ -1,0 +1,111 @@
+body {
+    height: 2000px;
+}
+.user-filter {
+    height: calc(100vh + 100px);
+    /* height: 100vh; */
+    overflow: auto;
+}
+.user-filter ul li {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    overflow: hidden;
+}
+@media (max-width: 767px) {
+    .user-filter ul li {
+        justify-content: center;
+    }
+}
+.user-filter ul li:hover {
+    background-color: var(--custom-secondary);
+    cursor: pointer;
+}
+.user-filter ul li:active {
+    font-weight: bold;
+}
+.user-filter ul li img {
+    width: 50px;
+    height: 50px;
+}
+
+.user-filter ul li.active {
+    background-color: var(--custom-secondary);
+    font-weight: bold;
+}
+.blog-slider {
+    padding: 0;
+    overflow: hidden;
+}
+.image-slider {
+    height: 100vh;
+    overflow: hidden;
+}
+.image-slider img {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.slider-nav {
+    height: 100px;
+    overflow-y: auto;
+    font-weight: bold;
+    text-transform: capitalize;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-nav div:first-of-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.slider-nav button {
+    text-transform: capitalize;
+}
+
+.ai-predictions {
+    background-color: var(--custom-secondary);
+    display: flex;
+    color: var(--custom-primary);
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dr-feedback {
+    background-color: var(--custom-secondary);
+    display: flex;
+    color: var(--custom-primary);
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.blog-comments {
+    background-color: var(--custom-secondary);
+    height: 60vh;
+    overflow: auto;
+}
+.comment-form span {
+    height: 50px;
+}
+
+/* customizing annotoriuos */
+button.r6o-btn.outline {
+    color: var(--custom-primary);
+    border-color: var(--custom-primary);
+}
+button.r6o-btn.outline:hover {
+    color: white;
+    background-color: var(--custom-primary);
+}
+button.r6o-btn {
+    border-color: var(--custom-primary);
+    background-color: var(--custom-primary);
+}
+button.r6o-btn:hover {
+    border-color: var(--custom-primary);
+    background-color: var(--custom-primary);
+}

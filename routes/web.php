@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//++++++++++++++++++< public routes >++++++++++++++++++
+//>>>>>>>>>>>>>>>>>>>>>> public routes >>>>>>>>>>>>>>>>>>
 Route::get('/', function () {
     return view('home');
 })->name("home");
@@ -29,9 +30,9 @@ Route::get("/logout", function () {
 Route::get("/signup", function () {
     return view("signup");
 });
-//++++++++++++++++++</ public routes >++++++++++++++++++
+//<<<<<<<<<<<<<<<<<<<<<< public routes <<<<<<<<<<<<<<<<<<<
 
-//++++++++++++++++++< user routes >++++++++++++++++++
+//>>>>>>>>>>>>>>>>>>>>>>> user routes >>>>>>>>>>>>>>>>>>>>
 Route::get("/home", function () {
     return view("user.home");
 });
@@ -52,8 +53,10 @@ Route::get("/blogs", function () {
     return view("user.blogs");
 });
 
-Route::get("/blog", function () {
-    return view("user.blog");
+Route::get("/blog", function ($id = 0) {
+    return view("user.blog", [
+        'id' => $id
+    ]);
 });
 
 Route::get("/meetings", function () {
@@ -64,7 +67,14 @@ Route::get("/meeting", function () {
     return view("user.meeting");
 });
 
-//++++++++++++++++++< user routes >++++++++++++++++++
+Route::post("/test", function (Request $req) {
+    return view("user.test", [
+        "data" => $req,
+        "myname" => "abdelouahab radja"
+    ]);
+});
+
+//<<<<<<<<<<<<<<<<<<<<<<<<<< user routes<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -77,7 +87,15 @@ Route::get("/meeting", function () {
 
 
 
+
+
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>> admin routes >>>>>>>>>>>>>>>>>>>>>>>>>
 
 Route::get("/admin", function () {
     return view("admin.admin-login");
 });
+
+// <<<<<<<<<<<<<<<<<<<<<<<< admin routes <<<<<<<<<<<<<<<<<<<<<<<<<

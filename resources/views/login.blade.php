@@ -33,7 +33,7 @@
         <form class="col-sm-10 col-md-6 col-lg-5" action="">
             <div class="input-group flex-nowrap mb-4">
                 <span class="input-group-text bg-custom-primary text-custom-dark" id="addon-wrapping">
-                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-user-doctor"></i>
                 </span>
                 <input name="email" type="text" class="form-control" placeholder="Username or Email"
                     aria-label="Username" aria-describedby="addon-wrapping">
