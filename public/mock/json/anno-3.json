@@ -1,0 +1,24 @@
+[
+    {
+        "@context": "http://www.w3.org/ns/anno.jsonld",
+        "type": "Annotation",
+        "body": [
+            {
+                "type": "TextualBody",
+                "value": "wow this is also a man in 2nd img",
+                "purpose": "commenting"
+            },
+            { "type": "TextualBody", "purpose": "tagging", "value": "man" },
+            { "type": "TextualBody", "purpose": "tagging", "value": "user-4" }
+        ],
+        "target": {
+            "source": "https://picsum.photos/1000/900",
+            "selector": {
+                "type": "FragmentSelector",
+                "conformsTo": "http://www.w3.org/TR/media-frags/",
+                "value": "xywh=pixel:369.628662109375,355.50469970703125,173.043701171875,350.7960205078125"
+            }
+        },
+        "id": "#22441f8e-28d2-48d7-9454-50f8b76aba95"
+    }
+]
