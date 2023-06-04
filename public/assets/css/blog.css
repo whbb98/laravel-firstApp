@@ -2,8 +2,7 @@ body {
     height: 2000px;
 }
 .user-filter {
-    height: calc(100vh + 100px);
-    /* height: 100vh; */
+    height: 100vh;
     overflow: auto;
 }
 .user-filter ul li {
@@ -34,11 +33,12 @@ body {
     font-weight: bold;
 }
 .blog-slider {
+    height: 100vh;
     padding: 0;
     overflow: hidden;
 }
 .image-slider {
-    height: 100vh;
+    height: calc(100vh - 100px);
     overflow: hidden;
 }
 .image-slider img {
@@ -82,6 +82,9 @@ body {
     align-items: center;
     cursor: pointer;
 }
+.table.feedback label {
+    cursor: pointer;
+}
 
 .blog-comments {
     background-color: var(--custom-secondary);
@@ -92,7 +95,7 @@ body {
     height: 50px;
 }
 
-/* customizing annotoriuos */
+/* >>>>>>>>>>>>>>>>>>customizing annotoriuos */
 button.r6o-btn.outline {
     color: var(--custom-primary);
     border-color: var(--custom-primary);
@@ -109,3 +112,4 @@ button.r6o-btn:hover {
     border-color: var(--custom-primary);
     background-color: var(--custom-primary);
 }
+/* <<<<<<<<<<<<<<<<<customizing annotoriuos */

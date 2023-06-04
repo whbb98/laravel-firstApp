@@ -46,29 +46,33 @@
                         <i class="fa-solid fa-filter"></i>
                         <span class="fw-bold ms-2 d-none d-lg-inline-block">Filter by Doctor</span>
                     </div>
-                    <ul class="list-unstyled">
-                        <li id="user-1" class="mb-2 rounded active">
+                    <ul id="users-list" class="list-unstyled">
+                        <li id="user-1" data-userid="1998" class="mb-2 rounded active">
                             <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
-                                title="user name" class="rounded-circle">
+                                title="user 1" class="rounded-circle">
                             &nbsp;
                             <span class="d-none d-md-block">
-                                {{ 'user name' }}
+                                {{ '@me' }}
                             </span>
                         </li>
-                        @for ($i = 0; $i < 2; $i++)
-                            <li id="user-1" class="mb-2 rounded">
+                        @for ($i = 2; $i < 5; $i++)
+                            <li id="user-{{ $i }}" data-userid="{{ $i * 10 }}" class="mb-2 rounded">
                                 <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
-                                    title="user name" class="rounded-circle">
+                                    title="user {{ $i }}" class="rounded-circle">
                                 &nbsp;
-                                <span class="d-none d-md-block">Dr John Doe</span>
+                                <span class="d-none d-md-block">
+                                    user {{ $i }}
+                                </span>
                             </li>
                         @endfor
                     </ul>
                 </div>
                 <div class="blog-slider bg-custom-secondary col rounded-end">
                     <div id="img-slider" class="image-slider">
-                        <img id="img-1" src="https://picsum.photos/1200/1000">
-                        <img id="img-2" src="https://picsum.photos/1100/1000">
+                        @for ($i = 1; $i < 5; $i++)
+                            <img id="img-{{ $i }}" data-imgID="{{ $i * 10 }}"
+                                {{ $url = asset('mock/xray/img (') . $i . ').png' }} src="{{ $url }}">
+                        @endfor
                     </div>
                     <div class="slider-nav row">
                         <div class="col-md-auto">
@@ -183,7 +187,7 @@
                 <form>
                     <div class="row">
                         <div class="col-md-12">
-                            <table class="table feedback">
+                            <table id="feedback_table" class="table feedback">
                                 <thead>
                                     <tr>
                                         <th class="col-2">Choice</th>
@@ -192,25 +196,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <input id="choice-1" class="form-check-input" type="radio"
-                                                name="choice" value="1">
-                                        </td>
-                                        <td>
-                                            <label class="form-check-label" for="choice-1">
-                                                Covid
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-custom-primary" role="progressbar"
-                                                    style="width: 90%;">
-                                                    90%
+                                    @for ($i = 0; $i < 5; $i++)
+                                        <tr>
+                                            <td>
+                                                <input id="choice-{{ $i }}" disabled
+                                                    class="form-check-input" type="radio" name="choice"
+                                                    value="1">
+                                            </td>
+                                            <td>
+                                                <label class="form-check-label text-muted fw-bold"
+                                                    for="choice-{{ $i }}">
+                                                    Covid
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-custom-primary" role="progressbar"
+                                                        style="width: 90%;">
+                                                        90%
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    @endfor
                                 </tbody>
                             </table>
                         </div>
@@ -218,7 +226,7 @@
                     <button type="submit" class="btn btn-custom-primary text-white rounded">
                         Vote
                     </button>
-                    <button type="reset" class="btn btn-outline-custom-primary rounded">
+                    <button id="feedback-edit-btn" type="button" class="btn btn-outline-custom-primary rounded">
                         Edit
                     </button>
                 </form>
