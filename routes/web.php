@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserAuthController;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,17 +20,18 @@ Route::get('/', function () {
     return view('home');
 })->name("home");
 
-Route::get("/login", function () {
-    return view("login");
-});
+Route::get("/login", [UserAuthController::class, "login"]);
 
-Route::get("/logout", function () {
-    return view("logout");
-});
+Route::post("/login-user", [UserAuthController::class, "loginUser"])
+    ->name("login-user");
 
-Route::get("/signup", function () {
-    return view("signup");
-});
+Route::get("/signup", [UserAuthController::class, "signup"]);
+
+Route::post("/signup-user", [UserAuthController::class, "signupUser"])
+    ->name("signup-user");
+
+Route::get("/logout", [UserAuthController::class, "logout"]);
+
 //<<<<<<<<<<<<<<<<<<<<<< public routes <<<<<<<<<<<<<<<<<<<
 
 //>>>>>>>>>>>>>>>>>>>>>>> user routes >>>>>>>>>>>>>>>>>>>>

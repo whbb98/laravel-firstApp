@@ -30,20 +30,42 @@
         <div class="text-center brand me-lg-2 col-md-3 mb-3">
             <a href="/"><img class="logo" src="logo.svg"></a>
         </div>
-        <form class="col-sm-10 col-md-6 col-lg-5" action="">
+        <form action="{{ route('login-user') }}" method="POST" class="col-sm-10 col-md-6 col-lg-5">
+            @csrf
+            @if (Session::has('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                    <a class="btn btn-custom-primary" href="/home">
+                        <span class="spinner-border spinner-border-sm"></span>
+                        Redirecting to Home Page ...
+                    </a>
+                </div>
+            @endif
+            @if (Session::has('fail'))
+                <div class="alert alert-danger">
+                    {{ Session::get('fail') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="input-group flex-nowrap mb-4">
                 <span class="input-group-text bg-custom-primary text-custom-dark" id="addon-wrapping">
                     <i class="fa-solid fa-user-doctor"></i>
                 </span>
-                <input name="email" type="text" class="form-control" placeholder="Username or Email"
-                    aria-label="Username" aria-describedby="addon-wrapping">
+                <input required name="email" value="{{ old('email') }}" type="email" class="form-control" placeholder="Enter your Email">
             </div>
             <div class="input-group flex-nowrap mb-4">
                 <span class="input-group-text bg-custom-primary text-custom-dark" id="addon-wrapping">
                     <i class="fa-solid fa-lock"></i>
                 </span>
-                <input name="password" type="password" class="form-control" placeholder="Password" aria-label="Username"
-                    aria-describedby="addon-wrapping">
+                <input required name="password" type="password" class="form-control" placeholder="Password">
             </div>
             <button class="btn btn-custom-primary text-white" type="submit">Login</button>
             <a href="" class="text-decoration-none">Password Reset</a>
