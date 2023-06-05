@@ -1,3 +1,5 @@
 @php
-    echo $myname;
+    echo session("email");
+    echo '<pre>';
+    print_r(session()->all());
 @endphp

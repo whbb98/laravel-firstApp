@@ -18,14 +18,14 @@ use Illuminate\Support\Facades\Route;
 //>>>>>>>>>>>>>>>>>>>>>> public routes >>>>>>>>>>>>>>>>>>
 Route::get('/', function () {
     return view('home');
-})->name("home");
+})->name("home")->middleware("AlreadyLoggedIn");
 
-Route::get("/login", [UserAuthController::class, "login"]);
+Route::get("/login", [UserAuthController::class, "login"])->middleware("AlreadyLoggedIn");
 
 Route::post("/login-user", [UserAuthController::class, "loginUser"])
     ->name("login-user");
 
-Route::get("/signup", [UserAuthController::class, "signup"]);
+Route::get("/signup", [UserAuthController::class, "signup"])->middleware("AlreadyLoggedIn");
 
 Route::post("/signup-user", [UserAuthController::class, "signupUser"])
     ->name("signup-user");
@@ -37,60 +37,44 @@ Route::get("/logout", [UserAuthController::class, "logout"]);
 //>>>>>>>>>>>>>>>>>>>>>>> user routes >>>>>>>>>>>>>>>>>>>>
 Route::get("/home", function () {
     return view("user.home");
-});
+})->middleware("CheckLogin");
 
 Route::get("/profile", function () {
     return view("user.profile");
-});
+})->middleware("CheckLogin");
 
 Route::get("/messages", function () {
     return view("user.messages");
-});
+})->middleware("CheckLogin");
 
 Route::get("/notifications", function () {
     return view("user.notifications");
-});
+})->middleware("CheckLogin");
 
 Route::get("/blogs", function () {
     return view("user.blogs");
-});
+})->middleware("CheckLogin");
 
 Route::get("/blog", function ($id = 0) {
     return view("user.blog", [
         'id' => $id
     ]);
-});
+})->middleware("CheckLogin");
 
 Route::get("/meetings", function () {
     return view("user.meetings");
-});
+})->middleware("CheckLogin");
 
 Route::get("/meeting", function () {
     return view("user.meeting");
-});
+})->middleware("CheckLogin");
 
-Route::post("/test", function (Request $req) {
-    return view("user.test", [
-        "data" => $req,
-        "myname" => "abdelouahab radja"
-    ]);
-});
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<< user routes<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get("/test", function () {
+    return view("user.test");
+})->middleware("CheckLogin");
 
 
 

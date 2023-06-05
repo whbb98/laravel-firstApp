@@ -30,11 +30,12 @@ class UserAuthController extends Controller
                 "email" => "required|email|unique:user",
                 "password" => "required|min:10",
                 'gender' => 'required|in:M,F',
-                "phone" => "required|numeric|min:10"
+                "phone" => "required|unique:user|numeric|min:10"
             ],
             [
-                "username.unique" => "The username you entered is already taken.",
-                "email.unique" => "The email you entered is already registered.",
+                "username.unique" => "The Username you entered is already taken.",
+                "email.unique" => "The Email you entered is already registered.",
+                "phone.unique" => "The Phone N° you entered is already registered."
             ]
         );
 
@@ -72,11 +73,8 @@ class UserAuthController extends Controller
         $user = User::where("email", "=", $req->email)->first();
         if ($user) {
             if (Hash::check($req->password, $user->password)) {
-                $req->session()->put("loginID",  $user->id);
-                $req->session()->put("email",  $user->email);
-                $req->session()->put("name",  $user->name);
-                return redirect('/home')
-                    ->with('delay', 3);
+                $req->session()->put("userid",  $user->id);
+                return redirect('/home');
             } else {
                 return back()->with("fail", "Wrong Password");
             }
@@ -87,6 +85,9 @@ class UserAuthController extends Controller
 
     public function logout()
     {
-        return "hello from logout()";
+        if (session()->has("userid")) {
+            session()->pull("userid");
+            return redirect("/login");
+        }
     }
 }
