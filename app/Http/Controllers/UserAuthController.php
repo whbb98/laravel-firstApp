@@ -76,7 +76,7 @@ class UserAuthController extends Controller
                 $req->session()->put("userid",  $user->id);
                 return redirect('/home');
             } else {
-                return back()->with("fail", "Wrong Password");
+                return back()->withInput()->with("fail", "Wrong Password");
             }
         } else {
             return back()->with("fail", "User Not Registered");
