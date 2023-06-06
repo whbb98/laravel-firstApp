@@ -69,7 +69,9 @@ Route::get("/meeting", function () {
     return view("user.meeting");
 })->middleware("CheckLogin");
 
-
+Route::get("/network", function () {
+    return view("user.network");
+})->middleware("CheckLogin");
 //<<<<<<<<<<<<<<<<<<<<<<<<<< user routes<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 Route::get("/test", function () {

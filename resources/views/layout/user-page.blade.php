@@ -161,6 +161,13 @@
                             <span class="d-none d-lg-inline">Meetings</span>
                         </a>
                     </li>
+                    <li class="fw-bold text-custom-primary mb-4">
+                        <a href="/network" title="network"
+                            class="text-lg-start btn btn-outline-custom-primary w-100 fs-6 rounded-pill">
+                            <i class="fa-solid fa-users"></i>
+                            <span class="d-none d-lg-inline">Network</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="page-content col-10 col-sm-10 col-lg-10">
