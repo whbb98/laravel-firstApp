@@ -7,13 +7,7 @@
 
 @section('style')
     <style>
-        .notifications li img {
-            width: 100px
-        }
 
-        .active {
-            color: white !important;
-        }
     </style>
 @endsection
 
