@@ -113,5 +113,5 @@
 @endsection
 
 @section('script')
-    <script defer src="{{ asset('assets/js/meetings.js') }}"></script>
+    <script defer src="{{ asset('assets/js/user/meetings.js') }}"></script>
 @endsection

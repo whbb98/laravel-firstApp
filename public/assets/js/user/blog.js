@@ -59,6 +59,15 @@ $("#hide-btn").click(function (e) {
     }
 });
 
+$("#fullscreen-btn").click(function (e) {
+    alert("full screen mode not supported yet");
+    // $("#img-slider").css("width","100vw");
+    // $("#img-slider").css("height","100vh");
+    // $("#img-slider").css("position","fixed");
+    // $("#img-slider").css("top","0");
+    // $("#img-slider").css("left","0");
+});
+
 $("#feedback-edit-btn").click(function (e) {
     $("#feedback_table input").attr("disabled", false);
     $("#feedback_table label").removeClass("text-muted");

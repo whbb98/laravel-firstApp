@@ -16,7 +16,7 @@
     {{-- ----------------------------------------------------- --}}
     <link rel="stylesheet" href="{{ asset('assets/css/global.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/blog.css') }}">
-    <script defer src="{{ asset('assets/js/blog.js') }}"></script>
+    <script defer src="{{ asset('assets/js/user/blog.js') }}"></script>
     <link rel="icon" type="image/x-icon" href="/assets/favicons/blog-icon.svg">
     <title>Blog View</title>
 </head>

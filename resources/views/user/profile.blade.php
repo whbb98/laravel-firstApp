@@ -25,11 +25,15 @@
     @endphp
     <div class="profile rounded bg-custom-dark" style="background-image: url('{{ $bg_link }}')">
 
-        <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg" alt="user name"
-            class="col-3 col-md-2 h-100 rounded-circle">
+        <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
+            alt="{{ session('username') }}" title="{{ session('username') }}" class="col-3 col-md-2 h-100 rounded-circle">
         <div class="py-2 ps-4 mt-2 rounded bg-custom-secondary">
-            <h5>John Doe</h5>
-            <h6>Radiologist</h6>
+            <h5 class="text-capitalize">
+                {{ session('first') . ' ' . session('last') }}
+            </h5>
+            <h6 class="text-capitalize">
+                radiologist
+            </h6>
         </div>
     </div>
 

@@ -242,5 +242,5 @@
 </div>
 {{-- <<<<<<<<<<<<<modal add new blog------------ --}}
 @section('script')
-    <script defer src="{{ asset('assets/js/blogs.js') }}"></script>
+    <script defer src="{{ asset('assets/js/user/blogs.js') }}"></script>
 @endsection

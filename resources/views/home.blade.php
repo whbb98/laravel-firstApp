@@ -149,6 +149,7 @@
                     voluptates.</p>
             </div>
         </div>
+        
         <div class="goal opacity-50 bg-white my-4 row p-3 rounded-4 col-md-7">
             <span class="col-3"><i class="fa-solid fa-eye fa-3x text-custom-primary"></i></span>
             <div class="content col-8">

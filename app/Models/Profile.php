@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Profile extends Model
 {
     use HasFactory;
-    protected $table = 'user';
+    protected $table = 'profile';
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
 
-    public function profile()
+    public function user()
     {
-        return $this->hasOne(Profile::class);
+        return $this->belongsTo(User::class);
     }
 }

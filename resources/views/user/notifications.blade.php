@@ -70,5 +70,5 @@
 @endsection
 
 @section('script')
-    <script defer src="{{ asset('assets/js/notifications.js') }}"></script>
+    <script defer src="{{ asset('assets/js/user/notifications.js') }}"></script>
 @endsection

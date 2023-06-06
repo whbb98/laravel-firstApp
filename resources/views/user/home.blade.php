@@ -7,24 +7,18 @@
 
 @section('style')
     <style>
-        .media {
-            max-height: 500px
+        .post-files a {
+            color: var(--custom-primary);
+            text-decoration: none;
         }
 
-        .media img {
-            height: 200px;
+        .post-files a:hover {
+            font-weight: bold;
         }
 
-        .post-comments {
-            max-height: 300px;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .post-header img,
-        .post-comments img {
-            width: 100px;
-            /* height: 100px; */
+        .post-comments .card {
+            max-height: 250px;
+            overflow: auto;
         }
     </style>
 @endsection
@@ -54,108 +48,81 @@
     </div>
 
     <div class="posts text-custom-dark">
-        <div id="user_post_1" class="post">
-            <div class="row post-header align-items-center">
-                <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg" alt="user name"
-                    class="col-3 col-md-2 col-lg-2 rounded-circle">
-                <div class="col-auto">
-                    <h5>Dr John Doe</h5>
-                    <span class="text-capitalize"><strong>@username</strong> wednesday 15 april</span>
+            <div id="post-id" class="card mt-4">
+                <div class="card-header bg-custom-secondary">
+                    <img src="https://picsum.photos/50" class="rounded-circle" alt="User Photo" width="50">
+                    <span class="ms-2 fw-bold">John Doe</span>
+                    <span class="ms-2">June 5, 2023</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text lead">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis et eligendi ipsa temporibus
+                        doloribus tenetur sed laboriosam blanditiis, cupiditate nobis.
+                    </p>
+                    <div class="post-files mb-2">
+                        <a href="path_to_pdf_file.pdf" target="_blank">
+                            <i class="fa-solid fa-file"></i> Download File
+                        </a>
+                    </div>
+                    <div id="post-id-slider" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://picsum.photos/500/300?random=1" class="d-block w-100" alt="Post Photo 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://picsum.photos/500/300?random=2" class="d-block w-100" alt="Post Photo 2">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#post-id-slider"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#post-id-slider"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-footer bg-outline-custom-secondary">
+                    <button id="like-btn" class="btn btn-outline-custom-primary btn-sm">
+                        <i class="fa-solid fa-thumbs-up"></i> Like
+                    </button>
+                    <button id="dislike-btn" class="btn btn-outline-custom-primary btn-sm"><i class="fa-solid fa-thumbs-down"></i> Dislike
+                    </button>
+                    <button class="btn btn-outline-custom-primary btn-sm" data-bs-toggle="collapse"
+                        data-bs-target="#post-id-comments">
+                        <i class="fa-solid fa-comments"></i> Comment
+                    </button>
+                    <button id="share-btn" class="btn btn-outline-custom-primary btn-sm">
+                        <i class="fa-solid fa-square-share-nodes"></i> Share
+                    </button>
+
+                    <!-- Comment section -->
+                    <div class="post-comments collapse mt-3" id="post-id-comments">
+                        <div class="card card-body">
+                            @for ($i = 0; $i < 10; $i++)
+                                <div class="mb-3">
+                                    <img src="https://picsum.photos/50" class="rounded-circle" alt="User Photo"
+                                        width="50">
+                                    <strong>User{{ $i + 1 }}:</strong>
+                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt suscipit at voluptatibus dicta voluptas dolore nemo ratione omnis hic, obcaecati magni animi? Voluptatibus, officiis quos veniam nostrum ipsam incidunt perspiciatis!</span>
+                                </div>
+                            @endfor
+                        </div>
+
+                        <!-- Comment input and button -->
+                        <div class="input-group mt-3">
+                            <input type="text" class="form-control" placeholder="Write a comment">
+                            <button class="btn btn-outline-custom-primary">Send</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row post-body px-5 py-3">
-                <p class="lead">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam, ex a doloremque veniam
-                    animi rerum ipsam pariatur obcaecati, dolorum alias quibusdam unde voluptas! Nobis eligendi voluptatem
-                    hic eum culpa esse.</p>
-                <div class="row media bg-custom-secondary justify-content-around overflow-auto rounded">
-                    <img class="col-auto my-2 rounded" src="https://picsum.photos/500/300" alt="img-1">
-                    <img class="col-auto my-2 rounded" src="https://picsum.photos/500/500" alt="img-2">
-                    <img class="col-auto my-2 rounded" src="https://picsum.photos/300/600" alt="img-3">
-                    <img class="col-auto my-2 rounded" src="https://picsum.photos/800/500" alt="img-4">
-                </div>
-            </div>
-            <div class="post-footer">
-                <div class="row rounded justify-content-center">
-                    <div class="col-auto">
-                        <span class="fw-bold">15</span>
-                        <button class="btn btn-outline-custom-primary active">
-                            <i class="fa-solid fa-thumbs-up"></i>
-                        </button>
-                        <span class="fw-bold">15</span>
-                        <button class="btn btn-outline-custom-primary ">
-                            <i class="fa-solid fa-thumbs-down"></i>
-                        </button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-outline-custom-primary" data-bs-toggle="collapse" href="#post-comment-1">
-                            <i class="fa-solid fa-comment"></i>
-                        </button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-outline-custom-primary ">
-                            <i class="fa-solid fa-share"></i>
-                        </button>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-outline-custom-primary">
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
-                <div id="post-comment-1" class="collapse post-comments">
-                    <div class="row user-comment align-items-center">
-                        <img class="col-3 col-lg-2 rounded-pill"
-                            src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
-                            alt="user img">
-                        <div class="col-5 col-lg-2">
-                            <h6>Dr John Doe</h6>
-                            <span class="col-1 fw-bold">@username</span>
-                        </div>
-                        <p class="lead mt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellat ratione
-                            autem nesciunt harum, necessitatibus dolor, nemo laboriosam repudiandae unde quod ullam! Quia
-                            porro aliquid repellat ea reiciendis. Perferendis, ipsum.</p>
-                    </div>
-                    <div class="row user-comment align-items-center">
-                        <img class="col-3 col-lg-2 rounded-pill"
-                            src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
-                            alt="user img">
-                        <div class="col-5 col-lg-2">
-                            <h6>Dr John Doe</h6>
-                            <span class="col-1 fw-bold">@username</span>
-                        </div>
-                        <p class="lead mt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellat ratione
-                            autem nesciunt harum, necessitatibus dolor, nemo laboriosam repudiandae unde quod ullam! Quia
-                            porro aliquid repellat ea reiciendis. Perferendis, ipsum.</p>
-                    </div>
-                    <form action="">
-                        <div class="input-group mb-4">
-                            <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Your
-                                Comment</span>
-                            <input name="comment" type="text" class="form-control" placeholder="Write Your Comment">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
+@endsection
 
-
-
+@section('script')
+    <script defer src="{{asset("assets/js/user/home.js")}}"></script>
 @endsection

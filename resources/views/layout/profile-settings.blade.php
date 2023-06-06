@@ -157,12 +157,12 @@
                 </tr>
             </thead>
             <tbody>
-                    <tr>
-                        <td>Education</td>
-                        <td>Master of Medecine</td>
-                        <td>June 2020</td>
-                        <td>CHU Hospital Oran</td>
-                    </tr>
+                <tr>
+                    <td>Education</td>
+                    <td>Master of Medecine</td>
+                    <td>June 2020</td>
+                    <td>CHU Hospital Oran</td>
+                </tr>
             </tbody>
         </table>
         {{-- ------------------------------------------ --}}

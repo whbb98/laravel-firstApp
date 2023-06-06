@@ -21,6 +21,20 @@
         .input-group-text {
             width: 150px
         }
+        .active{
+            background-color: var(--custom-primary) !important;
+            color:white;
+        }
+        #show-password {
+            width: 50px;
+            background-color: var(--custom-secondary);
+            font-weight: bold;
+        }
+        #show-password:hover{
+            background-color: var(--custom-primary) !important;
+            color:white;
+            cursor: pointer;
+        }
     </style>
     <title>Create Account</title>
 </head>
@@ -30,7 +44,7 @@
         <h1 class="text-center text-custom-primary mb-5">
             <a href="/"><img class="logo" src="logo.svg"></a> Doctor New Account
         </h1>
-        <form action="{{ route('signup-user') }}" method="POST" class="col-sm-10 col-md-6 col-lg-5 mb-5">
+        <form action="{{ route('signup-user') }}" method="POST" class="col-sm-10 col-md-6 mb-5">
             @csrf
             @if (Session::has('success'))
                 <div class="alert alert-success">
@@ -98,8 +112,11 @@
                     id="addon-wrapping">
                     password
                 </span>
-                <input required name="password" type="password" class="form-control"
+                <input id="password-input" required name="password" type="password" class="form-control"
                     placeholder="minimum 10 characters">
+                <span id="show-password" class="input-group-text">
+                    <i class="fa-solid fa-eye"></i>
+                </span>
             </div>
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-primary text-cutom-dark fw-bold text-capitalize"
@@ -124,6 +141,7 @@
         </form>
     </div>
     @include('layout.footer')
+    <script defer src="{{ asset('assets/js/signup.js') }}"></script>
 </body>
 
 </html>

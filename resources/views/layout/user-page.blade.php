@@ -13,6 +13,7 @@
     {{-- -------------------------------------------------- --}}
     <link rel="icon" type="image/x-icon" href="{{ $favicon_url }}">
     <link rel="stylesheet" href="assets/css/global.css">
+    <script defer src="{{ asset('assets/js/user-page.js') }}"></script>
     <title>@yield('title', 'default layout')</title>
     <style>
         .left-nav ul li:nth-of-type({{ $active_page_number }}) a {
@@ -94,7 +95,9 @@
                                 alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small" style="">
-                            <li><a class="dropdown-item" href="/profile">My Profile</a></li>
+                            <li><a class="dropdown-item" href="/profile">
+                                {{session("username")}}
+                            </a></li>
                             <li><a class="dropdown-item" href="/messages">Messages</a></li>
                             <li><a class="dropdown-item" href="/notifications">Notifications</a></li>
                             <li><a class="dropdown-item" href="/blogs">Blogs</a></li>
