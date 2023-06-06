@@ -32,8 +32,9 @@
                 {{ session('first') . ' ' . session('last') }}
             </h5>
             <h6 class="text-capitalize">
-                radiologist
+                <span>radiologist</span>
             </h6>
+            <span>(Pneumology Department)</span>
         </div>
     </div>
 

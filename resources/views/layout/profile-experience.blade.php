@@ -3,7 +3,7 @@
     <thead>
         <tr class="text-custom-primary">
             <th scope="col">Degree</th>
-            <th scope="col">Year</th>
+            <th scope="col">Period</th>
             <th scope="col">University/ Institute</th>
         </tr>
     </thead>
@@ -43,7 +43,7 @@
     <thead>
         <tr class="text-custom-primary">
             <th scope="col">Reward Name</th>
-            <th scope="col">Year</th>
+            <th scope="col">Period</th>
             <th scope="col">Organization</th>
         </tr>
     </thead>

@@ -4,64 +4,70 @@
         data-bs-toggle="collapse" data-bs-target="#p-info">
         Personal Information
     </div>
-    <form class="row mx-0 p-4 justify-content-between align-items-center collapse border rounded-bottom" id="p-info">
-        <div class="col-lg-3">
-            <img id="user_photo" class="rounded-circle" src="https://dummyimage.com/100x100/000/fff" alt="user name"
-                width="100px" height="100px">
-        </div>
-        <div class="col-lg-4">
-            <span class="fs-5">Upload A Photo</span>
-            <p>For Best Results Choose Jpeg Or Png File Format.
-                The Photo Must Be Real And Personal</p>
-            <input name="user_photo" class="mb-2" id="photo_input" type="file">
-        </div>
-        <div class="col-lg-3">
-            <button id="photo_upload"
-                class="d-block-lg btn btn-custom-primary text-white rounded-pill mb-lg-3 me-3">Upload</button>
-            <button id="photo_remove" class="d-block-lg btn btn-outline-custom-primary rounded-pill">Remove</button>
-        </div>
+    <div id="p-info" class="row mx-0 p-4 justify-content-between align-items-center collapse border rounded-bottom">
+        <form action="" class="row">
+            <div class="col-lg-3">
+                <img id="user_photo" class="rounded-circle" src="https://dummyimage.com/100x100/000/fff" alt="user name"
+                    width="100px" height="100px">
+            </div>
+            <div class="col-lg-4">
+                <span class="fs-5">Upload A Photo</span>
+                <p>For Best Results Choose Jpeg Or Png File Format.
+                    The Photo Must Be Real And Personal</p>
+                <input name="user_photo" class="mb-2" id="photo_input" type="file">
+            </div>
+            <div class="col-lg-3">
+                <button id="photo_upload"
+                    class="d-block-lg btn btn-custom-primary text-white rounded-pill me-3">Upload</button>
+                <button id="photo_remove" class="d-block-lg btn btn-outline-custom-primary rounded-pill">Remove</button>
+            </div>
+        </form>
         {{-- ------------------------------------------------------ --}}
         <hr class="my-5">
         {{-- ------------------------------------------------------ --}}
-        <div class="col-lg-3">
-            <img id="user_cover" class="rounded" src="https://dummyimage.com/200x100/000/fff" alt="cover photo"
-                width="200px" height="100px">
-        </div>
-        <div class="col-lg-4">
-            <span class="fs-5">Upload a Cover Photo</span>
-            <p>For Best Results Choose Jpeg Or Png File Format.</p>
-            <input name="user_cover" class="mb-2" id="cover_input" type="file">
-        </div>
-        <div class="col-lg-3">
-            <button id="cover_upload"
-                class="d-block-lg btn btn-custom-primary text-white rounded-pill mb-lg-3 me-3">Upload</button>
-            <button id="cover_remove" class="d-block-lg btn btn-outline-custom-primary rounded-pill">Remove</button>
-        </div>
+        <form action="" class="row">
+            <div class="col-lg-3">
+                <img id="user_cover" class="rounded" src="https://dummyimage.com/200x100/000/fff" alt="cover photo"
+                    width="200px" height="100px">
+            </div>
+            <div class="col-lg-4">
+                <span class="fs-5">Upload a Cover Photo</span>
+                <p>For Best Results Choose Jpeg Or Png File Format.</p>
+                <input name="user_cover" class="mb-2" id="cover_input" type="file">
+            </div>
+            <div class="col-lg-3">
+                <button id="cover_upload"
+                    class="d-block-lg btn btn-custom-primary text-white rounded-pill me-3">Upload</button>
+                <button id="cover_remove" class="d-block-lg btn btn-outline-custom-primary rounded-pill">Remove</button>
+            </div>
+        </form>
         {{-- ------------------------------------------------------ --}}
         <hr class="my-5">
         {{-- ------------------------------------------------------ --}}
-        <div class="input-group mb-3">
-            <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Full Name</span>
-            <input name="first_name" type="text" class="form-control" placeholder="First Name">
-            <input name="last_name" type="text" class="form-control" placeholder="Last Name">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
-                    class="fa-solid fa-envelope me-1"></i>Email</span>
-            <input name="email" type="email" class="form-control">
-        </div>
-        <div class="input-group mb-3">
-            <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
-                    class="fa-solid fa-phone me-1"></i>Phone</span>
-            <input name="phone" type="number" class="form-control">
-        </div>
-        <div class="form-floating">
-            <textarea name="bio" class="form-control text-custom-dark" id="bio" style="height: 100px"></textarea>
-            <label for="bio" class="ms-2">Write you Bio !</label>
-        </div>
-        <button type="submit" class="mt-4 col-5 col-md-3 btn btn-custom-primary text-white">Save Changes</button>
+        <form action="" class="row">
+            <div class="input-group mb-3">
+                <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Full Name</span>
+                <input name="first_name" type="text" class="form-control" placeholder="First Name">
+                <input name="last_name" type="text" class="form-control" placeholder="Last Name">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
+                        class="fa-solid fa-envelope me-1"></i>Email</span>
+                <input name="email" type="email" class="form-control">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
+                        class="fa-solid fa-phone me-1"></i>Phone</span>
+                <input name="phone" type="number" class="form-control">
+            </div>
+            <div class="form-floating">
+                <textarea name="bio" class="form-control text-custom-dark" id="bio" style="height: 100px"></textarea>
+                <label for="bio" class="ms-2">Write you Bio !</label>
+            </div>
+            <button type="submit" class="mt-4 col-5 col-md-3 btn btn-custom-primary text-white">Save Changes</button>
+        </form>
         {{--  --}}
-    </form>
+    </div>
     {{-- -----------------career information ------------------------ --}}
     <div class="mt-2 bg-custom-secondary text-custom-primary fs-5 fw-bold p-2 text-left rounded-top ptr-cursor"
         data-bs-toggle="collapse" data-bs-target="#c-info">
@@ -72,13 +78,18 @@
         <form action="">
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">
-                    <i class="fa-solid fa-briefcase me-1"></i>Current Occupation</span>
-                <input name="occupation" type="text" class="form-control" value="my position">
+                    <i class="fa-solid fa-briefcase me-1"></i>Occupation</span>
+                <input disabled name="occupation" type="text" class="form-control" value="my position">
+            </div>
+            <div class="input-group mb-4">
+                <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">
+                    <i class="fa-solid fa-briefcase me-1"></i>Department</span>
+                <input disabled name="department" type="text" class="form-control" value="my department">
             </div>
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
                         class="fa-solid fa-location-dot me-1"></i>City</span>
-                <select name="city" class="form-control">
+                <select disabled name="city" class="form-control">
                     <option value="16">Algiers</option>
                     <option value="31">Oran</option>
                     <option value="25">Constantine</option>
@@ -115,9 +126,10 @@
             <div class="input-group mb-4">
                 <span class="input-group-text text-custom-primary fw-bold text-custom-dark">
                     <i class="fa-solid fa-hospital me-1"></i>Hospital</span>
-                <input name="hospital" type="text" class="form-control" value="my hospital">
+                <input disabled name="hospital" type="text" class="form-control" value="my hospital">
             </div>
-            <button class="btn btn-custom-primary text-white col-5 col-md-3" type="submit">Save Changes</button>
+            <button class="btn btn-custom-primary text-white col-4 col-md-3" type="submit">Save Changes</button>
+            <button class="btn btn-outline-custom-primary col-4 col-md-3" type="button">Edit</button>
         </form>
         {{-- ---------- part two----------- --}}
         <h6 class="fs-5 mt-3 text-custom-dark">Add Career Info</h6>
@@ -315,3 +327,6 @@
         </form>
     </div>
 </div>
+@section('script')
+    <script defer src="{{asset("assets/js/user/profile.js")}}"></script>
+@endsection
