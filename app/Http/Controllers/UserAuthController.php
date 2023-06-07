@@ -80,7 +80,6 @@ class UserAuthController extends Controller
                 session()->put("last", $user->last_name);
                 session()->put("email", $user->email);
                 session()->put("phone", $user->phone);
-                // $birthYear = Carbon::createFromFormat('Y-m-d', $user->birth_date)->year;
                 session()->put("birthYear", $user->birth_date);
                 $dateTime = Carbon::createFromFormat('Y-m-d H:i:s', $user->joined);
                 session()->put("joined", $dateTime->format('Y F'));
