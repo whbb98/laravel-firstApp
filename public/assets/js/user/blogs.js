@@ -112,3 +112,4 @@ $("#has_meeting").change(function () {
 $("#upload-btn").click(function (e) { 
     $("#files_input").trigger("click");
 });
+
