@@ -12,9 +12,4 @@ class User extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
-
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
-    }
 }
