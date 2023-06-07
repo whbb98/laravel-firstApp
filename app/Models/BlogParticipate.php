@@ -10,7 +10,7 @@ class BlogParticipate extends Model
 {
     use HasFactory;
     protected $table = 'blog_participate';
-    protected $primaryKey = 'id';
+    protected $primaryKey = ['blog_id', 'user_id'];
     public $incrementing = true;
     public $timestamps = false;
 
