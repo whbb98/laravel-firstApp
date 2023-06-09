@@ -1,3 +1,7 @@
+@php
+    $career = $user->career;
+@endphp
+
 <h5 class="fw-bold text-custom-primary mt-4">Education</h5>
 <table class="table education table-hover">
     <thead>
@@ -8,13 +12,15 @@
         </tr>
     </thead>
     <tbody>
-        @for ($i = 0; $i < 3; $i++)
-            <tr>
-                <td>Master of Medecine</td>
-                <td>June 2020</td>
-                <td>CHU Hospital Oran</td>
-            </tr>
-        @endfor
+        @foreach ($career as $item)
+            @if ($item['type'] == 'education')
+                <tr id="{{ $item['id'] }}">
+                    <td>{{ $item['career_name'] }}</td>
+                    <td>{{ $item['period'] }}</td>
+                    <td>{{ $item['organization'] }}</td>
+                </tr>
+            @endif
+        @endforeach
     </tbody>
 </table>
 
@@ -28,13 +34,15 @@
         </tr>
     </thead>
     <tbody>
-        @for ($i = 0; $i < 3; $i++)
-            <tr>
-                <td>Radiologist</td>
-                <td>Jul 2019</td>
-                <td>CHU Hospital Oran</td>
+        @foreach ($career as $item)
+        @if ($item['type'] == 'experience')
+            <tr id="{{ $item['id'] }}">
+                <td>{{ $item['career_name'] }}</td>
+                <td>{{ $item['period'] }}</td>
+                <td>{{ $item['organization'] }}</td>
             </tr>
-        @endfor
+        @endif
+    @endforeach
     </tbody>
 </table>
 
@@ -48,12 +56,14 @@
         </tr>
     </thead>
     <tbody>
-        @for ($i = 0; $i < 3; $i++)
-            <tr>
-                <td>Top Radiologist Medal</td>
-                <td>May 2022</td>
-                <td>CHU Hospital Oran</td>
+        @foreach ($career as $item)
+        @if ($item['type'] == 'reward')
+            <tr id="{{ $item['id'] }}">
+                <td>{{ $item['career_name'] }}</td>
+                <td>{{ $item['period'] }}</td>
+                <td>{{ $item['organization'] }}</td>
             </tr>
-        @endfor
+        @endif
+    @endforeach
     </tbody>
 </table>

@@ -1,5 +1,35 @@
 console.log("welcome to profile js (user-page)");
 
+$("#photo_remove").click(function (e) {
+    e.preventDefault();
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+        if (xhttp.responseText == "1") {
+            alert("deleted successfully");
+            location.reload();
+        } else {
+            alert("error on delete");
+        }
+    }
+    xhttp.open("GET", "/profile/deleteProfilePhoto");
+    xhttp.send();
+});
+
+$("#cover_remove").click(function (e) {
+    e.preventDefault();
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+        if (xhttp.responseText == "1") {
+            alert("deleted successfully");
+            location.reload();
+        } else {
+            alert("error on delete");
+        }
+    }
+    xhttp.open("GET", "/profile/deleteProfileCover");
+    xhttp.send();
+});
+
 $("#edit-profile-bio-btn").click(function (e) {
     $("#profile-bio-form input, textarea").removeAttr("disabled");
 });

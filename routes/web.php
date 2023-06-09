@@ -91,6 +91,16 @@ Route::post(
     [ProfileController::class, "updateProfileCover"]
 )->middleware("CheckLogin");
 
+Route::get(
+    "/profile/deleteProfilePhoto",
+    [ProfileController::class, "deleteProfilePhoto"]
+)->middleware("CheckLogin");
+
+Route::get(
+    "/profile/deleteProfileCover",
+    [ProfileController::class, "deleteProfileCover"]
+)->middleware("CheckLogin");
+
 Route::post(
     "/profile/updateProfileBio",
     [ProfileController::class, "updateProfileBio"]

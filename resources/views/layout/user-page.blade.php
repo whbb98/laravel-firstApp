@@ -23,9 +23,14 @@
     </style>
     @yield('style')
 </head>
+@php
+    use App\Models\User;
+    $user = User::find(session('userid'));
+    $profile = $user->profile;
+    $userPhoto = $profile->getPhoto();
+@endphp
 
 <body>
-
     {{-- start header --}}
     <header class="p-3 mb-3 border-bottom">
         <div class="container">
@@ -91,13 +96,13 @@
                     <div class="dropdown text-end ms-4">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
-                                alt="mdo" width="32" height="32" class="rounded-circle">
+                            <img src="{{ $userPhoto }}" alt="mdo" width="32" height="32"
+                                class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small" style="">
                             <li><a class="dropdown-item" href="/profile">
-                                {{session("username")}}
-                            </a></li>
+                                    {{ session('username') }}
+                                </a></li>
                             <li><a class="dropdown-item" href="/messages">Messages</a></li>
                             <li><a class="dropdown-item" href="/notifications">Notifications</a></li>
                             <li><a class="dropdown-item" href="/blogs">Blogs</a></li>

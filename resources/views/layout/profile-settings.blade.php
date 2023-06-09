@@ -8,7 +8,7 @@
         <form action="/profile/updateProfilePhoto" method="POST" enctype="multipart/form-data" class="row">
             @csrf
             <div class="col-lg-3">
-                <img id="user_photo" class="rounded-circle" src="https://dummyimage.com/100x100/000/fff" alt="user name"
+                <img id="user_photo" class="rounded-circle" src="{{$profile->getPhoto()}}" alt="user name"
                     width="100px" height="100px">
             </div>
             <div class="col-lg-4">
@@ -20,7 +20,8 @@
             <div class="col-lg-3">
                 <button id="photo_upload"
                     class="d-block-lg btn btn-custom-primary text-white rounded-pill me-3">Upload</button>
-                <button id="photo_remove" class="d-block-lg btn btn-outline-custom-primary rounded-pill">Remove</button>
+                <button type="button" id="photo_remove"
+                    class="d-block-lg btn btn-outline-custom-primary rounded-pill">Remove</button>
             </div>
         </form>
         {{-- ------------------------------------------------------ --}}
@@ -29,7 +30,7 @@
         <form action="/profile/updateProfileCover" method="POST" enctype="multipart/form-data" class="row">
             @csrf
             <div class="col-lg-3">
-                <img id="user_cover" class="rounded" src="https://dummyimage.com/200x100/000/fff" alt="cover photo"
+                <img id="user_cover" class="rounded" src="https://dummyimage.com/950x200/000/fff" alt="cover photo"
                     width="200px" height="100px">
             </div>
             <div class="col-lg-4">
@@ -40,7 +41,8 @@
             <div class="col-lg-3">
                 <button id="cover_upload"
                     class="d-block-lg btn btn-custom-primary text-white rounded-pill me-3">Upload</button>
-                <button id="cover_remove" class="d-block-lg btn btn-outline-custom-primary rounded-pill">Remove</button>
+                <button type="button" id="cover_remove"
+                    class="d-block-lg btn btn-outline-custom-primary rounded-pill">Remove</button>
             </div>
         </form>
         {{-- ------------------------------------------------------ --}}
@@ -49,7 +51,9 @@
         <form id="profile-bio-form" method="POST" action="/profile/updateProfileBio" class="row">
             @csrf
             <div class="form-floating">
-                <textarea required disabled name="bio" class="form-control text-custom-dark" id="bio" style="height: 100px"></textarea>
+                <textarea required disabled name="bio" class="form-control text-custom-dark" id="bio" style="height: 100px">
+                {{ $profile->bio }}
+                </textarea>
                 <label for="bio" class="ms-2">Write you Bio !</label>
             </div>
             <button type="submit" class="mt-4 col-5 col-md-3 btn btn-custom-primary text-white">Save Changes</button>
@@ -70,12 +74,14 @@
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">
                     <i class="fa-solid fa-briefcase me-1"></i>Occupation</span>
-                <input disabled name="occupation" type="text" class="form-control" value="my position">
+                <input disabled name="occupation" type="text" class="form-control"
+                    value="{{ $profile->occupation }}">
             </div>
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">
                     <i class="fa-solid fa-briefcase me-1"></i>Department</span>
-                <input disabled name="department" type="text" class="form-control" value="my department">
+                <input disabled name="department" type="text" class="form-control"
+                    value="{{ $profile->department }}">
             </div>
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
@@ -85,7 +91,7 @@
                         require_once app_path('Helpers/constants.php');
                     @endphp
                     @foreach ($cities as $key => $value)
-                        <option value="{{ $key }}" @if ($key == 32) selected @endif>
+                        <option value="{{ $key }}" @if ($key == $profile->city) selected @endif>
                             {{ $value }}
                         </option>
                     @endforeach
@@ -94,7 +100,8 @@
             <div class="input-group mb-4">
                 <span class="input-group-text text-custom-primary fw-bold text-custom-dark">
                     <i class="fa-solid fa-hospital me-1"></i>Hospital</span>
-                <input disabled name="hospital" type="text" class="form-control" value="my hospital">
+                <input disabled name="hospital" type="text" class="form-control"
+                    value="{{ $profile->hospital }}">
             </div>
             <button class="btn btn-custom-primary text-white col-4 col-md-3" type="submit">Save Changes</button>
             <button id="edit-career-btn" class="btn btn-outline-custom-primary col-4 col-md-3"
@@ -141,12 +148,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Education</td>
-                    <td>Master of Medecine</td>
-                    <td>June 2020</td>
-                    <td>CHU Hospital Oran</td>
-                </tr>
+                @php
+                    $career = $user->career;
+                @endphp
+                @foreach ($career as $item)
+                    <tr id="{{ $item['id'] }}">
+                        <td>{{ $item['type'] }}</td>
+                        <td>{{ $item['career_name'] }}</td>
+                        <td>{{ $item['period'] }}</td>
+                        <td>{{ $item['organization'] }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
         {{-- ------------------------------------------ --}}
@@ -159,13 +171,26 @@
     <form method="POST" id="notifications-form" action="/profile/updateProfileNotificationSettings"
         class="row mx-0 collapse border rounded-bottom py-2 ps-4">
         @csrf
+        @php
+            $flags = [];
+            $flags[0] = $notificationSettings['followers'];
+            $flags[1] = $notificationSettings['message_request'];
+            $flags[2] = $notificationSettings['blog_invitations'];
+            $flags[3] = $notificationSettings['emails'];
+            $flags[4] = $notificationSettings['sms'];
+            $i = 0;
+        @endphp
         @foreach ($notifications as $key => $value)
             <div class="form-check mb-2">
-                <input @if ($key == 3) checked @endif id="{{ $key }}" disabled
-                    class="form-check-input p-2" type="checkbox" name="notifications[]" value="{{ $key }}">
+                <input @if ($flags[$i] == 1) checked @endif id="{{ $key }}" disabled
+                    class="form-check-input p-2" type="checkbox" name="notifications[]"
+                    value="{{ $key }}">
                 <label for="{{ $key }}" class="form-check-label text-custom-dark fs-5">{{ $value }}
                 </label>
             </div>
+            @php
+                $i++;
+            @endphp
         @endforeach
         <button disabled class="btn btn-custom-primary text-white col-4 col-md-3" type="submit">Save Changes</button>
         <button id="edit-notifications-btn" class="btn btn-outline-custom-primary col-4 col-md-3 ms-2"
@@ -184,12 +209,14 @@
         <div class="input-group mb-4">
             <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">
                 <i class="fa-solid fa-phone me-1"></i>Phone N°</span>
-            <input required disabled name="contact_phone" type="number" class="form-control">
+            <input required disabled name="contact_phone" type="number" class="form-control"
+                value="{{ $contact->phone }}">
         </div>
         <div class="input-group mb-4">
             <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
                     class="fa-solid fa-envelope me-1"></i>Email</span>
-            <input required disabled name="contact_email" type="email" class="form-control">
+            <input required disabled name="contact_email" type="email" class="form-control"
+                value="{{ $contact->email }}">
         </div>
         <div class="input-group mb-4">
             <span class="input-group-text text-custom-primary fw-bold text-custom-dark">
@@ -197,20 +224,25 @@
             <span class="input-group-text">From</span>
             <select required disabled name="from_day">
                 @foreach ($days as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
+                    <option @if ($key == $contact->from_day) selected @endif value="{{ $key }}">
+                        {{ $value }}
+                    </option>
                 @endforeach
             </select>
-            <input required disabled name="from_time" type="time" class="form-control">
+            <input value="{{ $contact->from_time }}" required disabled name="from_time" type="time"
+                class="form-control">
             <span class="input-group-text">To</span>
             <select required disabled name="to_day">
                 @foreach ($days as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
+                    <option @if ($key == $contact->to_day) selected @endif value="{{ $key }}">
+                        {{ $value }}
+                    </option>
                 @endforeach
             </select>
-            <input required disabled name="to_time" type="time" class="form-control">
+            <input value="{{ $contact->to_time }}" required disabled name="to_time" type="time"
+                class="form-control">
         </div>
-        <button disabled type="submit"
-            class="btn btn-custom-primary text-white col-5 col-md-3">Save</button>
+        <button disabled type="submit" class="btn btn-custom-primary text-white col-5 col-md-3">Save</button>
         <button id="edit-contactme-btn" class="btn btn-outline-custom-primary col-4 col-md-3"
             type="button">Edit</button>
         {{--  --}}
@@ -224,11 +256,11 @@
     <div class="collapse border rounded-bottom" id="acc-settings">
         {{-- update email form --}}
         <h6 class="fs-5 mt-3 text-custom-dark">Email Update</h6>
-        <form method="POST" action="{{route("updateEmail-form")}}">
+        <form method="POST" action="{{ route('updateEmail-form') }}">
             @csrf
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Current Email</span>
-                <input disabled type="email" class="form-control" value="example@gmail.com">
+                <input disabled type="email" class="form-control" value="{{ $user->email }}">
             </div>
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">New Email</span>
@@ -242,11 +274,11 @@
         </form>
         {{-- update mobile phone form --}}
         <h6 class="fs-5 mt-3 text-custom-dark">Phone Update</h6>
-        <form method="POST" action="{{route("updatePhone-form")}}">
+        <form method="POST" action="{{ route('updatePhone-form') }}">
             @csrf
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Current Phone N°</span>
-                <input disabled type="number" class="form-control" value="05661501371">
+                <input disabled type="number" class="form-control" value="{{ $user->phone }}">
             </div>
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">New Phone</span>
@@ -260,7 +292,7 @@
         </form>
         {{-- update password form --}}
         <h6 class="fs-5 mt-3 text-custom-dark">Password Update</h6>
-        <form method="POST" action="{{route("updatePassword-form")}}">
+        <form method="POST" action="{{ route('updatePassword-form') }}">
             @csrf
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Current Password</span>

@@ -1,13 +1,16 @@
+@php
+    require_once app_path('Helpers/constants.php');
+@endphp
 <h5 class="text-custom-primary">Bio</h5>
-<p class="lead">Update your bio in your profile settings !</p>
+<p class="lead">{{ $profile->bio }}</p>
 <div class="d-flex justify-content-between">
     <div class="">
         <i class="fa-solid fa-location-dot text-custom-primary fa-xl"></i>
-        <span class="fs-6 text-capitalize">your city</span>
+        <span class="fs-6 text-capitalize">{{ $cities["$profile->city"] }}</span>
     </div>
     <div class="">
-        <i class="fa-solid fa-cake-candles text-custom-primary fa-xl"></i>
-        <span class="fs-6 text-capitalize">{{ session('birthYear') }}</span>
+        <i class="fa-solid fa-hospital text-custom-primary fa-xl"></i>
+        <span class="fs-6 text-capitalize">{{ $profile->hospital }}</span>
     </div>
     <div class="">
         <i class="fa-solid fa-calendar text-custom-primary fa-xl"></i>

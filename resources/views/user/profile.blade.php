@@ -7,6 +7,11 @@
 
 @section('style')
     <style>
+        .user-img {
+            width: 150px;
+            height: 150px;
+        }
+
         .profile-menu ul li a.active {
             color: white;
             font-weight: bold;
@@ -17,24 +22,30 @@
         }
     </style>
 @endsection
-
+@php
+    use App\Models\User;
+    require_once app_path('Helpers/constants.php');
+    $user = User::find(session('userid'));
+    $profile = $user->profile;
+    $contact = $user->contact;
+    $notificationSettings = $user->notificationSettings;
+    $bg_link = $profile->getCover();
+    $userPhoto = $profile->getPhoto();
+@endphp
 @section('page-content')
     {{-- <h3>My Profile</h3> --}}
-    @php
-        $bg_link = 'https://source.unsplash.com/950x200/?nature';
-    @endphp
-    <div class="profile rounded bg-custom-dark img-fluid" style="background-image: url('{{ $bg_link }}')">
+    <div class="profile rounded bg-custom-dark" style="background-image: url('{{ $bg_link }}')">
 
-        <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
-            alt="{{ session('username') }}" title="{{ session('username') }}" class="col-3 col-md-2 h-100 rounded-circle">
-        <div class="py-2 ps-4 mt-2 rounded bg-custom-secondary">
+        <img src="{{ $userPhoto }}" alt="{{ session('username') }}" title="{{ session('username') }}"
+            class="user-img rounded-circle">
+        <div class="py-2 ps-4 mt-2 rounded-bottom bg-custom-secondary">
             <h5 class="text-capitalize">
                 {{ session('first') . ' ' . session('last') }}
             </h5>
             <h6 class="text-capitalize">
-                <span>your occupation</span>
+                <span>{{ $profile->occupation }}</span>
             </h6>
-            <span class="text-capitalize">your department</span>
+            <span class="text-capitalize">{{ $profile->department }}</span>
         </div>
     </div>
     {{-- >>>>>>>>>>>>>>>>>>>>>>> displaying status messages --}}

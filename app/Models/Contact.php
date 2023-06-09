@@ -15,6 +15,15 @@ class Contact extends Model
     public $incrementing = true;
     public $timestamps = false;
 
+    protected $attributes = [
+        'phone' => '0123456789',
+        'email' => 'your working email',
+        'from_day' => '1',
+        'to_day' => '5',
+        'from_time' => '00:00',
+        'to_time' => '00:00'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\NotificationSettings;
+use App\Models\Profile;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Expr\New_;
 
 class UserAuthController extends Controller
 {
@@ -51,6 +55,15 @@ class UserAuthController extends Controller
         $user->gender = $req->gender;
 
         $status = $user->save();
+        $profile = new Profile();
+        $profile->user_id  = $user->id;
+        $profile->save();
+        $contact = new Contact();
+        $contact->user_id = $user->id;
+        $contact->save();
+        $notificationSettings = new NotificationSettings();
+        $notificationSettings->user_id = $user->id;
+        $notificationSettings->save();
         if ($status) {
             return back()->with("success", "Account Created Successfully");
         } else {

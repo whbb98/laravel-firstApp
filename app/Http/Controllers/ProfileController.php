@@ -58,6 +58,23 @@ class ProfileController extends Controller
             return redirect()->back()->with('error', 'Failed to update Cover.');
         }
     }
+
+    public function deleteProfilePhoto()
+    {
+        $user = User::find(session('userid'));
+        $profile = $user->profile;
+        $status = $profile->deletePhoto();
+        return $status;
+    }
+
+    public function deleteProfileCover()
+    {
+        $user = User::find(session('userid'));
+        $profile = $user->profile;
+        $status = $profile->deleteCover();
+        return $status;
+    }
+
     public function updateProfileBio(Request $request)
     {
         $request->validate([
@@ -115,5 +132,4 @@ class ProfileController extends Controller
             return redirect()->back()->with('error', 'Failed to update Career Info.');
         }
     }
-
 }
