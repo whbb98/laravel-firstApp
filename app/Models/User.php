@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Model
 {
@@ -14,6 +15,9 @@ class User extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
+
+
+    // start of relatioships>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     public function profile(): HasOne
     {
@@ -110,5 +114,23 @@ class User extends Model
     public function blogFeedbacks(): HasMany
     {
         return $this->hasMany(BlogFeedbackData::class, 'voted_by');
+    }
+
+    // end of relatioships<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public function updateEmail($new_email)
+    {
+        $this->email = $new_email;
+        return $this->save();
+    }
+    public function updatePhone($new_phone)
+    {
+        $this->phone = $new_phone;
+        return $this->save();
+    }
+    public function updatePassword($new_password)
+    {
+        $this->password = Hash::make($new_password);
+        return $this->save();
     }
 }

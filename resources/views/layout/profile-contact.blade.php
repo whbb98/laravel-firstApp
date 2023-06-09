@@ -4,15 +4,15 @@
             <i class="fa-solid fa-phone"></i>
             <b>Phone</b>
         </span>
-        <span class="ms-5 text-custom-dark">+213 5123456</span>
+        <span class="ms-5 text-custom-dark">{{session('phone')}}</span>
     </div>
     <div class="mb-5">
         <span class="text-custom-primary">
             <i class="fa-solid fa-envelope"></i>
             <b>Email</b>
         </span>
-        <a class="ms-5 text-custom-dark" href="mailto:example@gmail.com">
-            example@gmail.com
+        <a class="ms-5 text-custom-dark" href="mailto:{{ session('email') }}">
+            {{ session('email') }}
         </a>
     </div>
     <div class="d-flex align-items-center">

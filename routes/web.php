@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\testing;
 use App\Http\Controllers\UserAuthController;
-use GuzzleHttp\Psr7\Request;
+use App\Http\Controllers\CareerController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NotificationSettingsController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,9 +80,81 @@ Route::get("/network", function () {
 })->middleware("CheckLogin");
 //<<<<<<<<<<<<<<<<<<<<<<<<<< user routes<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-Route::get("/test", function () {
-    return view("user.test");
-})->middleware("CheckLogin");
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>> User Profile Forms
+Route::post(
+    "/profile/updateProfilePhoto",
+    [ProfileController::class, "updateProfilePhoto"]
+)->middleware("CheckLogin");
+
+Route::post(
+    "/profile/updateProfileCover",
+    [ProfileController::class, "updateProfileCover"]
+)->middleware("CheckLogin");
+
+Route::post(
+    "/profile/updateProfileBio",
+    [ProfileController::class, "updateProfileBio"]
+)->middleware("CheckLogin");
+
+Route::post(
+    "/profile/updateProfileCareer",
+    [ProfileController::class, "updateProfileCareer"]
+)->middleware("CheckLogin");
+
+Route::post(
+    "/profile/addProfileCareerRow",
+    [CareerController::class, "addProfileCareerRow"]
+)->middleware("CheckLogin");
+
+Route::get(
+    "/profile/dropProfileCareerRow",
+    [CareerController::class, "dropProfileCareerRow"]
+)->middleware("CheckLogin");
+
+Route::post(
+    "/profile/updateProfileNotificationSettings",
+    [NotificationSettingsController::class, "updateProfileNotificationSettings"]
+)->middleware("CheckLogin");
+
+Route::post(
+    "/profile/updateContact",
+    [ContactController::class, "updateContact"]
+)->middleware("CheckLogin")->name("contactme-form");
+
+Route::post(
+    "/profile/updateEmail",
+    [UserController::class, "updateEmail"]
+)->middleware("CheckLogin")->name("updateEmail-form");
+
+Route::post(
+    "/profile/updatePhone",
+    [UserController::class, "updatePhone"]
+)->middleware("CheckLogin")->name("updatePhone-form");
+
+Route::post(
+    "/profile/updatePassword",
+    [UserController::class, "updatePassword"]
+)->middleware("CheckLogin")->name("updatePassword-form");
+
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<< User Profile Forms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get("/test", [testing::class, "test"])->middleware("CheckLogin");
 
 
 

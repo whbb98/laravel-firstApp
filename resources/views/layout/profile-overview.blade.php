@@ -1,10 +1,9 @@
 <h5 class="text-custom-primary">Bio</h5>
-<p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem nostrum nam maxime ullam magni nobis
-    veniam, vitae quo harum magnam voluptatum laborum sunt, laudantium nesciunt qui, sequi non iste velit.</p>
+<p class="lead">Update your bio in your profile settings !</p>
 <div class="d-flex justify-content-between">
     <div class="">
         <i class="fa-solid fa-location-dot text-custom-primary fa-xl"></i>
-        <span class="fs-6 text-capitalize">city</span>
+        <span class="fs-6 text-capitalize">your city</span>
     </div>
     <div class="">
         <i class="fa-solid fa-cake-candles text-custom-primary fa-xl"></i>
@@ -23,7 +22,7 @@
     <span class="fs-6 text-capitalize">followers</span>
 </div>
 
-<h5 class="text-custom-primary mt-4">My Team</h5>
+<h5 class="text-custom-primary mt-4">My Network</h5>
 
 <div class="row justify-content-left mb-5">
     @for ($i = 0; $i < 5; $i++)

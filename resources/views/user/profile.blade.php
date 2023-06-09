@@ -21,9 +21,9 @@
 @section('page-content')
     {{-- <h3>My Profile</h3> --}}
     @php
-        $bg_link = 'https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0%2C214%2C3008%2C1579&wid=1200&hei=630&scl=2.506666666666667';
+        $bg_link = 'https://source.unsplash.com/950x200/?nature';
     @endphp
-    <div class="profile rounded bg-custom-dark" style="background-image: url('{{ $bg_link }}')">
+    <div class="profile rounded bg-custom-dark img-fluid" style="background-image: url('{{ $bg_link }}')">
 
         <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
             alt="{{ session('username') }}" title="{{ session('username') }}" class="col-3 col-md-2 h-100 rounded-circle">
@@ -32,12 +32,147 @@
                 {{ session('first') . ' ' . session('last') }}
             </h5>
             <h6 class="text-capitalize">
-                <span>radiologist</span>
+                <span>your occupation</span>
             </h6>
-            <span>(Pneumology Department)</span>
+            <span class="text-capitalize">your department</span>
         </div>
     </div>
+    {{-- >>>>>>>>>>>>>>>>>>>>>>> displaying status messages --}}
+    @if (session('success'))
+        <div class="mt-2 alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
+    @if (session('error'))
+        <div class="mt-2 alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    {{-- ++++++++++++++++ user photo + cover +++++++++++++++++ --}}
+    @if ($errors->has('user_photo'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('user_photo') }}
+        </div>
+    @endif
+
+    @if ($errors->has('user_cover'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('user_cover') }}
+        </div>
+    @endif
+    {{-- ++++++++++++++++ bio +++++++++++++++++ --}}
+    @if ($errors->has('bio'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('bio') }}
+        </div>
+    @endif
+    {{-- ++++++++++++++++ career info +++++++++++++++++ --}}
+    @if ($errors->has('occupation'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('occupation') }}
+        </div>
+    @endif
+    @if ($errors->has('department'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('department') }}
+        </div>
+    @endif
+    @if ($errors->has('hospital'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('hospital') }}
+        </div>
+    @endif
+    @if ($errors->has('city'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('city') }}
+        </div>
+    @endif
+    {{-- ++++++++++++++++ career row +++++++++++++++++ --}}
+    @if ($errors->has('career_name'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('career_name') }}
+        </div>
+    @endif
+    @if ($errors->has('career_period'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('career_period') }}
+        </div>
+    @endif
+    @if ($errors->has('organization'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('organization') }}
+        </div>
+    @endif
+    @if ($errors->has('career_type'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('career_type') }}
+        </div>
+    @endif
+    {{-- ++++++++++++++++ contact me +++++++++++++++++ --}}
+    @if ($errors->has('contact_phone'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('contact_phone') }}
+        </div>
+    @endif
+    @if ($errors->has('contact_email'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('contact_email') }}
+        </div>
+    @endif
+    @if ($errors->has('from_day'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('from_day') }}
+        </div>
+    @endif
+    @if ($errors->has('to_day'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('to_day') }}
+        </div>
+    @endif
+    @if ($errors->has('from_time'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('from_time') }}
+        </div>
+    @endif
+    @if ($errors->has('to_time'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('to_time') }}
+        </div>
+    @endif
+    {{-- ++++++++++++++++ account settings +++++++++++++++++ --}}
+    @if ($errors->has('new_email'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('new_email') }}
+        </div>
+    @endif
+    @if ($errors->has('password'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('password') }}
+        </div>
+    @endif
+    @if ($errors->has('new_phone'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('new_phone') }}
+        </div>
+    @endif
+    @if ($errors->has('current_password'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('current_password') }}
+        </div>
+    @endif
+    @if ($errors->has('new_password'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('new_password') }}
+        </div>
+    @endif
+    @if ($errors->has('new_password_confirm'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('new_password_confirm') }}
+        </div>
+    @endif
+
+    {{-- <<<<<<<<<<<<<<<<<<<<<<<< displaying status messages --}}
     {{-- menu tabs >>>>>>>>>> --}}
     <div class="profile-menu mt-4 rounded">
         <ul class="nav nav-tabs bg-custom-secondary rounded-pill justify-content-between">

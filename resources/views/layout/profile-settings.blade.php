@@ -5,7 +5,8 @@
         Personal Information
     </div>
     <div id="p-info" class="row mx-0 p-4 justify-content-between align-items-center collapse border rounded-bottom">
-        <form action="" class="row">
+        <form action="/profile/updateProfilePhoto" method="POST" enctype="multipart/form-data" class="row">
+            @csrf
             <div class="col-lg-3">
                 <img id="user_photo" class="rounded-circle" src="https://dummyimage.com/100x100/000/fff" alt="user name"
                     width="100px" height="100px">
@@ -25,7 +26,8 @@
         {{-- ------------------------------------------------------ --}}
         <hr class="my-5">
         {{-- ------------------------------------------------------ --}}
-        <form action="" class="row">
+        <form action="/profile/updateProfileCover" method="POST" enctype="multipart/form-data" class="row">
+            @csrf
             <div class="col-lg-3">
                 <img id="user_cover" class="rounded" src="https://dummyimage.com/200x100/000/fff" alt="cover photo"
                     width="200px" height="100px">
@@ -44,27 +46,15 @@
         {{-- ------------------------------------------------------ --}}
         <hr class="my-5">
         {{-- ------------------------------------------------------ --}}
-        <form action="" class="row">
-            <div class="input-group mb-3">
-                <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Full Name</span>
-                <input name="first_name" type="text" class="form-control" placeholder="First Name">
-                <input name="last_name" type="text" class="form-control" placeholder="Last Name">
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
-                        class="fa-solid fa-envelope me-1"></i>Email</span>
-                <input name="email" type="email" class="form-control">
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
-                        class="fa-solid fa-phone me-1"></i>Phone</span>
-                <input name="phone" type="number" class="form-control">
-            </div>
+        <form id="profile-bio-form" method="POST" action="/profile/updateProfileBio" class="row">
+            @csrf
             <div class="form-floating">
-                <textarea name="bio" class="form-control text-custom-dark" id="bio" style="height: 100px"></textarea>
+                <textarea required disabled name="bio" class="form-control text-custom-dark" id="bio" style="height: 100px"></textarea>
                 <label for="bio" class="ms-2">Write you Bio !</label>
             </div>
             <button type="submit" class="mt-4 col-5 col-md-3 btn btn-custom-primary text-white">Save Changes</button>
+            <button id="edit-profile-bio-btn" type="button"
+                class="ms-4 mt-4 col-5 col-md-3 btn btn-outline-custom-primary">Edit</button>
         </form>
         {{--  --}}
     </div>
@@ -75,7 +65,8 @@
     </div>
     <div class="p-4 collapse border rounded-bottom" id="c-info">
         {{-- current occupation info --}}
-        <form action="">
+        <form id="career-form" method="POST" action="/profile/updateProfileCareer">
+            @csrf
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">
                     <i class="fa-solid fa-briefcase me-1"></i>Occupation</span>
@@ -90,37 +81,14 @@
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
                         class="fa-solid fa-location-dot me-1"></i>City</span>
                 <select disabled name="city" class="form-control">
-                    <option value="16">Algiers</option>
-                    <option value="31">Oran</option>
-                    <option value="25">Constantine</option>
-                    <option value="1">Adrar</option>
-                    <option value="2">Chlef</option>
-                    <option value="3">Laghouat</option>
-                    <option value="4">Oum El Bouaghi</option>
-                    <option value="5">Batna</option>
-                    <option value="6">Bejaia</option>
-                    <option value="7">Biskra</option>
-                    <option value="8">Blida</option>
-                    <option value="9">Bouira</option>
-                    <option value="10">Tizi Ouzou</option>
-                    <option value="11">Djelfa</option>
-                    <option value="12">El Bayadh</option>
-                    <option value="13">El Oued</option>
-                    <option value="14">Ghardaia</option>
-                    <option value="15">M'Sila</option>
-                    <option value="17">Mascara</option>
-                    <option value="18">Médéa</option>
-                    <option value="19">M'Sila</option>
-                    <option value="20">Naama</option>
-                    <option value="21">Ouargla</option>
-                    <option value="22">Saida</option>
-                    <option value="23">Sétif</option>
-                    <option value="24">Skikda</option>
-                    <option value="26">Tamanrasset</option>
-                    <option value="27">Tlemcen</option>
-                    <option value="28">Tiaret</option>
-                    <option value="29">Tizi Ouzou</option>
-                    <option value="30">El Tarf</option>
+                    @php
+                        require_once app_path('Helpers/constants.php');
+                    @endphp
+                    @foreach ($cities as $key => $value)
+                        <option value="{{ $key }}" @if ($key == 32) selected @endif>
+                            {{ $value }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
             <div class="input-group mb-4">
@@ -129,17 +97,19 @@
                 <input disabled name="hospital" type="text" class="form-control" value="my hospital">
             </div>
             <button class="btn btn-custom-primary text-white col-4 col-md-3" type="submit">Save Changes</button>
-            <button class="btn btn-outline-custom-primary col-4 col-md-3" type="button">Edit</button>
+            <button id="edit-career-btn" class="btn btn-outline-custom-primary col-4 col-md-3"
+                type="button">Edit</button>
         </form>
         {{-- ---------- part two----------- --}}
         <h6 class="fs-5 mt-3 text-custom-dark">Add Career Info</h6>
-        <form action="">
+        <form method="POST" action="/profile/addProfileCareerRow">
+            @csrf
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Type</span>
                 <select name="career_type" class="form-control">
-                    <option value="education">Education</option>
-                    <option value="reward">Reward</option>
-                    <option value="experience">Experience</option>
+                    @foreach ($careerType as $item)
+                        <option value="{{ $item }}">{{ $item }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="input-group mb-4">
@@ -149,17 +119,19 @@
             </div>
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Period</span>
-                <input name="period" type="month" required class="form-control">
+                <input name="career_period" type="date" required class="form-control">
             </div>
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Organization</span>
                 <input name="organization" type="text" required class="form-control">
             </div>
-            <button type="submit" class="btn btn-custom-primary text-white col-5 col-md-3">Add Row</button>
+            <button type="submit" class="btn btn-custom-primary text-white col-5 col-md-3">
+                AddRow
+            </button>
         </form>
         {{-- ------------ previously added--------------- --}}
         <h5 class="fw-bold text-custom-primary mt-4">Previously Added</h5>
-        <table class="table education table-hover">
+        <table id="career-data" class="table table-hover">
             <thead>
                 <tr class="text-custom-primary">
                     <th scope="col">Career Info</th>
@@ -181,89 +153,66 @@
     </div>
     {{-- ---------------- Notifications Settings --------------------- --}}
     <div class="mt-2 bg-custom-secondary text-custom-primary fs-5 fw-bold p-2 text-left rounded-top ptr-cursor"
-        data-bs-toggle="collapse" data-bs-target="#n-settings">
+        data-bs-toggle="collapse" data-bs-target="#notifications-form">
         Notifications Settings
     </div>
-    <form action="" class="row mx-0 collapse border rounded-bottom py-2 ps-4" id="n-settings">
-        <div class="form-check mb-2">
-            <input id="n1" class="form-check-input p-2" type="checkbox" name="notifications[]"
-                value="1">
-            <label for="n1" class="form-check-label text-custom-dark fs-5">When Someone Started Following
-                Me</label>
-        </div>
-        <div class="form-check mb-2">
-            <input id="n2" class="form-check-input p-2" type="checkbox" name="notifications[]"
-                value="2">
-            <label for="n2" class="form-check-label text-custom-dark fs-5">When Someone Message Me</label>
-        </div>
-        <div class="form-check mb-2">
-            <input id="n3" class="form-check-input p-2" type="checkbox" name="notifications[]"
-                value="3">
-            <label for="n3" class="form-check-label text-custom-dark fs-5">Notify Me For Blog
-                Invitations</label>
-        </div>
-        <div class="form-check mb-2">
-            <input id="n4" class="form-check-input p-2" type="checkbox" name="notifications[]"
-                value="4">
-            <label for="n4" class="form-check-label text-custom-dark fs-5">When Someone Follows Me</label>
-        </div>
-        <div class="form-check mb-2">
-            <input id="n5" class="form-check-input p-2" type="checkbox" name="notifications[]"
-                value="5">
-            <label for="n5" class="form-check-label text-custom-dark fs-5">Enable Email Notifications</label>
-        </div>
-        <div class="form-check mb-2">
-            <input id="n6" class="form-check-input p-2" type="checkbox" name="notifications[]"
-                value="6">
-            <label for="n6" class="form-check-label text-custom-dark fs-5">Enable SMS Notifications</label>
-        </div>
-        <button class="btn btn-custom-primary text-white col-5 col-md-3" type="submit">Save Changes</button>
+    <form method="POST" id="notifications-form" action="/profile/updateProfileNotificationSettings"
+        class="row mx-0 collapse border rounded-bottom py-2 ps-4">
+        @csrf
+        @foreach ($notifications as $key => $value)
+            <div class="form-check mb-2">
+                <input @if ($key == 3) checked @endif id="{{ $key }}" disabled
+                    class="form-check-input p-2" type="checkbox" name="notifications[]" value="{{ $key }}">
+                <label for="{{ $key }}" class="form-check-label text-custom-dark fs-5">{{ $value }}
+                </label>
+            </div>
+        @endforeach
+        <button disabled class="btn btn-custom-primary text-white col-4 col-md-3" type="submit">Save Changes</button>
+        <button id="edit-notifications-btn" class="btn btn-outline-custom-primary col-4 col-md-3 ms-2"
+            type="button">Edit</button>
         {{--  --}}
     </form>
 
     {{-- -----------------contact me ------------------------ --}}
     <div class="mt-2 bg-custom-secondary text-custom-primary fs-5 fw-bold p-2 text-left rounded-top ptr-cursor"
-        data-bs-toggle="collapse" data-bs-target="#contactme">
+        data-bs-toggle="collapse" data-bs-target="#contactme-form">
         Contact me
     </div>
-    <form action="" class="p-4 collapse border rounded-bottom" id="contactme">
+    <form id="contactme-form" method="POST" action="{{ route('contactme-form') }}"
+        class="p-4 collapse border rounded-bottom">
+        @csrf
         <div class="input-group mb-4">
             <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">
                 <i class="fa-solid fa-phone me-1"></i>Phone N°</span>
-            <input name="contact_phone" type="number" class="form-control">
+            <input required disabled name="contact_phone" type="number" class="form-control">
         </div>
         <div class="input-group mb-4">
             <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
                     class="fa-solid fa-envelope me-1"></i>Email</span>
-            <input name="contact_email" type="email" class="form-control">
+            <input required disabled name="contact_email" type="email" class="form-control">
         </div>
         <div class="input-group mb-4">
             <span class="input-group-text text-custom-primary fw-bold text-custom-dark">
                 <i class="fa-solid fa-hospital me-1"></i>Availability</span>
             <span class="input-group-text">From</span>
-            <select name="from_day">
-                <option value="1">Sun</option>
-                <option value="2">Mon</option>
-                <option value="3">Tue</option>
-                <option value="4">Wed</option>
-                <option value="5">Thu</option>
-                <option value="6">Fri</option>
-                <option value="7">Sat</option>
+            <select required disabled name="from_day">
+                @foreach ($days as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                @endforeach
             </select>
-            <input name="from_time" type="time" class="form-control">
+            <input required disabled name="from_time" type="time" class="form-control">
             <span class="input-group-text">To</span>
-            <select name="to_day" id="">
-                <option value="1">Sun</option>
-                <option value="2">Mon</option>
-                <option value="3">Tue</option>
-                <option value="4">Wed</option>
-                <option value="5">Thu</option>
-                <option value="6">Fri</option>
-                <option value="7">Sat</option>
+            <select required disabled name="to_day">
+                @foreach ($days as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                @endforeach
             </select>
-            <input name="to_time" type="time" class="form-control">
+            <input required disabled name="to_time" type="time" class="form-control">
         </div>
-        <button type="submit" class="btn btn-custom-primary text-white col-5 col-md-3">Save</button>
+        <button disabled type="submit"
+            class="btn btn-custom-primary text-white col-5 col-md-3">Save</button>
+        <button id="edit-contactme-btn" class="btn btn-outline-custom-primary col-4 col-md-3"
+            type="button">Edit</button>
         {{--  --}}
     </form>
 
@@ -275,7 +224,8 @@
     <div class="collapse border rounded-bottom" id="acc-settings">
         {{-- update email form --}}
         <h6 class="fs-5 mt-3 text-custom-dark">Email Update</h6>
-        <form action="">
+        <form method="POST" action="{{route("updateEmail-form")}}">
+            @csrf
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Current Email</span>
                 <input disabled type="email" class="form-control" value="example@gmail.com">
@@ -292,7 +242,8 @@
         </form>
         {{-- update mobile phone form --}}
         <h6 class="fs-5 mt-3 text-custom-dark">Phone Update</h6>
-        <form action="">
+        <form method="POST" action="{{route("updatePhone-form")}}">
+            @csrf
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Current Phone N°</span>
                 <input disabled type="number" class="form-control" value="05661501371">
@@ -309,7 +260,8 @@
         </form>
         {{-- update password form --}}
         <h6 class="fs-5 mt-3 text-custom-dark">Password Update</h6>
-        <form action="">
+        <form method="POST" action="{{route("updatePassword-form")}}">
+            @csrf
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Current Password</span>
                 <input name="current_password" type="password" required class="form-control">
@@ -328,5 +280,5 @@
     </div>
 </div>
 @section('script')
-    <script defer src="{{asset("assets/js/user/profile.js")}}"></script>
+    <script defer src="{{ asset('assets/js/user/profile.js') }}"></script>
 @endsection
