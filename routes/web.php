@@ -150,9 +150,9 @@ Route::post(
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>> User Network Routes
 Route::get(
-    "/network/getAllHospitals",
-    [UserNetworkController::class, "getAllHospitals"]
-)->middleware("CheckLogin");
+    "/network/getAllUsers",
+    [UserNetworkController::class, "getAllUsers"]
+)->middleware("CheckLogin")->name("user-search-form");
 // <<<<<<<<<<<<<<<<<<<<<<<<<< User Network Routes
 
 

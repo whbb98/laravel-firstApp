@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 
+require_once app_path('Helpers/constants.php');
+
 class Profile extends Model
 {
     use HasFactory;
@@ -16,12 +18,12 @@ class Profile extends Model
     public $timestamps = false;
 
     protected $attributes = [
-        'bio' => 'Hello World Bio!',
+        'bio' => 'Welcome to my profile',
         'city' => '31',
         'hospital' => '0',
-        'other_hospital' => 'hospital',
+        'other_hospital' => 'hospital unknown',
         'occupation' => 'occupation',
-        'department' => 'department'
+        'department' => '0'
     ];
 
     public function user(): BelongsTo
@@ -93,5 +95,27 @@ class Profile extends Model
     {
         $this->cover = null;
         return $this->save();
+    }
+
+    public function getCityName()
+    {
+        global $cities;
+        return $cities[$this->city];
+    }
+
+    public function getDpartmentName()
+    {
+        global $hospitalDepartments;
+        return $hospitalDepartments[$this->department];
+    }
+
+    public function getHospitalName()
+    {
+        global $hospitals;
+        if ($this->hospital === "0") {
+            return $this->other_hospital;
+        } else {
+            return $hospitals[$this->hospital];
+        }
     }
 }

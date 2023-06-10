@@ -10,6 +10,7 @@
         .user-img {
             width: 150px;
             height: 150px;
+            object-fit: cover
         }
 
         .profile-menu ul li a.active {

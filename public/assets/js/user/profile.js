@@ -39,6 +39,8 @@ $("#edit-career-btn").click(function (e) {
     $("#career-form input, select").removeAttr("disabled");
     if ($('#hospitals-select').val() == "0") {
         $("#other-hospital").removeAttr("hidden");
+    } else {
+        $("#other-hospital input").prop("disabled", true);
     }
     console.log($('#hospitals-select').val());
 });
@@ -46,6 +48,7 @@ $('#hospitals-select').change(function () {
     const selectedValue = $(this).val();
     if (selectedValue === '0') {
         $("#other-hospital").removeAttr("hidden");
+        $("#other-hospital input").prop("disabled", false);
     } else {
         $("#other-hospital").attr("hidden", true);
         $("#other-hospital input").prop("disabled", true);

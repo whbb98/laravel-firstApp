@@ -20,7 +20,7 @@ $notifications = [
     "5" => "Enable SMS Notifications"
 ];
 
-
+global $cities;
 $cities = array(
     "01" => "Adrar",
     "02" => "Chlef",
@@ -82,13 +82,16 @@ $cities = array(
     "58" => "El Menia"
 );
 
+global $hospitals;
 $hospitals = [
     "CHO" => "University Hospital of Oran",
-    "EHU" => "1 Novermber University Hospital of Oran",
+    "EHU" => "1 Novermber Hospital of Oran hello world",
     "0" => "Other Hospital"
 ];
 
+global $hospitalDepartments;
 $hospitalDepartments = [
+    "0" => 'Unknown department',
     "1" => 'Cardiology',
     "2" => 'Oncology',
     "3" => 'Neurology',

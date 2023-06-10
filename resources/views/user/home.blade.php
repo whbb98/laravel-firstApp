@@ -10,6 +10,7 @@
         .user-img{
             width: 150px;
             height: 125px;
+            object-fit: cover
         }
         @media(max-width:767px){
             .user-img{

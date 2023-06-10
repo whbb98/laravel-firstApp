@@ -7,27 +7,26 @@
 
 @section('style')
     <style>
-
+        .ellipsis {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
     </style>
 @endsection
 @php
-    // use App\Models\User;
     require_once app_path('Helpers/constants.php');
-    // $user = User::find(session('userid'));
-    // $profile = $user->profile;
-    // $contact = $user->contact;
-    // $notificationSettings = $user->notificationSettings;
-    // $bg_link = $profile->getCover();
-    // $userPhoto = $profile->getPhoto();
 @endphp
 @section('page-content')
     <div class="container text-custom-dark">
         <h3 class="text-capitalize">manage your network</h3>
-        <div class="row mt-3 align-items-end">
+        <form id="search-users-form" action="{{ route('user-search-form') }}" method="GET" class="row mt-3 align-items-end">
             <div class="col-md-12">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search users">
-                    <button class="btn btn-outline-custom-primary" type="button">Search</button>
+                    <input id="search-query" name="search_query" type="text" class="form-control"
+                        placeholder="Search users">
+                    <button id="btn-search" class="btn btn-outline-custom-primary" type="submit">Search</button>
                 </div>
             </div>
             <div class="col-md-12">
@@ -36,8 +35,8 @@
                         <label for="city-filter" class="form-label fw-bold">
                             City:
                         </label>
-                        <select class="form-select" id="city-filter">
-                            <option value="0" selected>All</option>
+                        <select name="city_filter" class="form-select" id="city-filter">
+                            <option value="all" selected>All</option>
                             @foreach ($cities as $key => $value)
                                 <option value="{{ $key }}">
                                     {{ $value }}
@@ -49,33 +48,39 @@
                         <label for="hospital-filter" class="form-label fw-bold">
                             Hospital:
                         </label>
-                        <select class="form-select" id="hospital-filter">
-                            <option value="0" selected>All</option>
+                        <select name="hospital_filter" class="form-select" id="hospital-filter">
+                            <option value="all" selected>All</option>
+                            @foreach ($hospitals as $key => $value)
+                                <option value="{{ $key }}">
+                                    {{ $value }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label for="department-filter" class="form-label fw-bold">
                             Department:
                         </label>
-                        <select class="form-select" id="department-filter">
-                            <option selected>All</option>
-                            <!-- Add department options here -->
+                        <select name="department_filter" class="form-select" id="department-filter">
+                            <option value="all" selected>All</option>
+                            @foreach ($hospitalDepartments as $key => $value)
+                                <option value="{{ $key }}">
+                                    {{ $value }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label for="department-filter" class="form-label fw-bold">
+                        <label for="occupation-filter" class="form-label fw-bold">
                             Occupation:
                         </label>
-                        <select class="form-select" id="occupation-filter">
-                            <option selected>All</option>
-                            <!-- Add department options here -->
-                        </select>
+                        <input name="occupation_filter" type="text" name="" class="form-control"
+                            id="occupation-filter">
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-3" id="user-profiles">
-            <!-- User profile cards will be dynamically added here -->
+        </form>
+        <div id="user-profiles" class="row mt-3">
         </div>
     </div>
 @endsection
