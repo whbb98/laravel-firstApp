@@ -37,8 +37,35 @@ $("#edit-profile-bio-btn").click(function (e) {
 
 $("#edit-career-btn").click(function (e) {
     $("#career-form input, select").removeAttr("disabled");
+    if ($('#hospitals-select').val() == "0") {
+        $("#other-hospital").removeAttr("hidden");
+    }
+    console.log($('#hospitals-select').val());
+});
+$('#hospitals-select').change(function () {
+    const selectedValue = $(this).val();
+    if (selectedValue === '0') {
+        $("#other-hospital").removeAttr("hidden");
+    } else {
+        $("#other-hospital").attr("hidden", true);
+        $("#other-hospital input").prop("disabled", true);
+    }
 });
 
+$('#career-data').on('click', 'tr', function () {
+    const rowID = $(this).attr('id');
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+        if (xhttp.responseText == "1") {
+            alert("deleted successfully");
+            location.reload();
+        } else {
+            alert("Error on Delete");
+        }
+    }
+    xhttp.open("GET", `http://doctoraicollab.test/profile/dropProfileCareerRow/${rowID}`);
+    xhttp.send();
+});
 
 $("#edit-notifications-btn").click(function (e) {
     $("#notifications-form input").removeAttr("disabled");

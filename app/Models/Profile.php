@@ -16,11 +16,12 @@ class Profile extends Model
     public $timestamps = false;
 
     protected $attributes = [
-        'bio' => 'default bio',
+        'bio' => 'Hello World Bio!',
         'city' => '31',
-        'hospital' => 'default hospital',
-        'occupation' => 'default occupation',
-        'department' => 'default department'
+        'hospital' => '0',
+        'other_hospital' => 'hospital',
+        'occupation' => 'occupation',
+        'department' => 'department'
     ];
 
     public function user(): BelongsTo
@@ -53,6 +54,7 @@ class Profile extends Model
         $this->occupation = strip_tags($req->occupation);
         $this->department = strip_tags($req->department);
         $this->hospital = strip_tags($req->hospital);
+        $this->other_hospital = strip_tags($req->other_hospital);
         $this->city = strip_tags($req->city);
         return $this->save();
     }

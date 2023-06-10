@@ -14,7 +14,7 @@ class UserNetwork extends Model
     protected $primaryKey = ['sender', 'receiver'];
     public $incrementing = true;
     public $timestamps = false;
-
+    
     public function sender(): BelongsTo
     {
         return $this->belongsTo(User::class, 'sender');
@@ -23,5 +23,18 @@ class UserNetwork extends Model
     public function receiver(): BelongsTo
     {
         return $this->belongsTo(User::class, 'receiver');
+    }
+
+
+    public function getAllHospitals()
+    {
+        $hospitals = Profile::distinct()->pluck('hospital');
+        return $hospitals;
+    }
+
+    public function getAllDepartments()
+    {
+        $departments = Profile::distinct()->pluck('department');
+        return $departments;
     }
 }

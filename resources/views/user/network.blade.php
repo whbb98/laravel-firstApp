@@ -10,8 +10,16 @@
 
     </style>
 @endsection
-
-
+@php
+    // use App\Models\User;
+    require_once app_path('Helpers/constants.php');
+    // $user = User::find(session('userid'));
+    // $profile = $user->profile;
+    // $contact = $user->contact;
+    // $notificationSettings = $user->notificationSettings;
+    // $bg_link = $profile->getCover();
+    // $userPhoto = $profile->getPhoto();
+@endphp
 @section('page-content')
     <div class="container text-custom-dark">
         <h3 class="text-capitalize">manage your network</h3>
@@ -29,8 +37,12 @@
                             City:
                         </label>
                         <select class="form-select" id="city-filter">
-                            <option selected>All</option>
-                            <!-- Add city options here -->
+                            <option value="0" selected>All</option>
+                            @foreach ($cities as $key => $value)
+                                <option value="{{ $key }}">
+                                    {{ $value }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-md-3">
@@ -38,8 +50,7 @@
                             Hospital:
                         </label>
                         <select class="form-select" id="hospital-filter">
-                            <option selected>All</option>
-                            <!-- Add hospital options here -->
+                            <option value="0" selected>All</option>
                         </select>
                     </div>
                     <div class="col-md-3">
@@ -55,7 +66,7 @@
                         <label for="department-filter" class="form-label fw-bold">
                             Occupation:
                         </label>
-                        <select class="form-select" id="department-filter">
+                        <select class="form-select" id="occupation-filter">
                             <option selected>All</option>
                             <!-- Add department options here -->
                         </select>
@@ -67,7 +78,6 @@
             <!-- User profile cards will be dynamically added here -->
         </div>
     </div>
-
 @endsection
 
 @section('script')

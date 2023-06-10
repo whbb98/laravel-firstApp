@@ -108,7 +108,6 @@
                 <a href="/meeting/30" target="_blank" class="btn btn-outline-custom-primary">Join Meeting</a>
             </div>
         </div>
-
     </div>
 @endsection
 

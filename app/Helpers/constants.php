@@ -81,3 +81,20 @@ $cities = array(
     "57" => "El Meghaier",
     "58" => "El Menia"
 );
+
+$hospitals = [
+    "CHO" => "University Hospital of Oran",
+    "EHU" => "1 Novermber University Hospital of Oran",
+    "0" => "Other Hospital"
+];
+
+$hospitalDepartments = [
+    "1" => 'Cardiology',
+    "2" => 'Oncology',
+    "3" => 'Neurology',
+    "4" => 'Pediatrics',
+    "5" => 'Dermatology',
+    "6" => 'Urology',
+    "7" => 'Radiology',
+    "8" => 'Pneumology'
+];

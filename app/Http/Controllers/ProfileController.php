@@ -107,6 +107,7 @@ class ProfileController extends Controller
             'occupation' => 'required|string',
             'department' => 'required|string',
             'hospital' => 'required|string',
+            'other_hospital' => $request->input('hospital') === "0" ? 'required|string' : 'string',
             'city' => [
                 'required',
                 'string',

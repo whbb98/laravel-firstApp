@@ -166,7 +166,6 @@
                 <h1 class="modal-title fs-5 text-custom-primary" id="staticBackdropLabel">
                     Create New Blog
                 </h1>
-                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
             </div>
             <div class="modal-body row text-custom-dark">
                 <div class="col-8">
@@ -186,7 +185,8 @@
                         <label for="b-participants" class="form-label fw-bold">
                             Blog Participats: <span class="text-custom-warning fw-bold">*</span>
                         </label>
-                        <input type="email" class="form-control" id="bp-input" placeholder="Participant Email">
+                        <input type="text" class="form-control" id="bp-input"
+                            placeholder="Participant (Name, Email, Username)">
                         <div class="bg-custom-secondary rounded row text-capitalize mt-2">
                             <span class="col-2 fw-bold">username</span>
                             <span class="col-4 fw-bold">full name</span>
@@ -219,12 +219,14 @@
                             Schedule a Meeting
                         </label>
                         <input id="has-meeting-input" disabled name="meeting-date" type="datetime-local"
-                            class="form-control">
+                            class="form-control" required>
+                        <input id="has-meeting-url" disabled name="meeting-url" type="url"
+                            class="form-control mt-2" required placeholder="https://meet.google.com/abcd123">
                     </div>
                     <div class="mb-3 mt-3">
                         <p class="form-label">file format that are supported are: jpg, jpeg, png
                         </p>
-                        <input id="files_input" name="files" multiple type="file" class="d-none">
+                        <input id="files_input" name="files" multiple type="file" class="d-none" required>
                         <button id="upload-btn" type="button" class="btn btn-custom-primary text-white">
                             <i class="fa-sharp fa-solid fa-x-ray"></i>
                             Upload Files

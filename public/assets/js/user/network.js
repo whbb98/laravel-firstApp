@@ -1,5 +1,3 @@
-console.log("welcome to network page");
-
 // Sample data for user profiles
 const users = [
   {
@@ -52,7 +50,7 @@ function generateUserProfileCard(user) {
 }
 
 // Function to display user profile cards
-function displayUserProfiles() {
+function renderUserProfiles() {
   const userProfileContainer = document.getElementById('user-profiles');
   userProfileContainer.innerHTML = '';
 
@@ -63,4 +61,31 @@ function displayUserProfiles() {
 }
 
 // Display initial user profiles
-displayUserProfiles();
+renderUserProfiles();
+
+function fetchRenderHospitals() {
+  fetch('http://doctoraicollab.test/network/getAllHospitals')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.length);
+      for (const item of data) {
+        const option = document.createElement('option');
+        option.setAttribute('value', item);
+        option.textContent = item;
+        $("#hospital-filter").append(option);
+      }
+    })
+    .catch(error => {
+      // Handle any errors that occur during the request
+      console.error(error);
+    });
+}
+
+
+
+
+// >>>>>>>>>>> running when my script loads
+console.log("welcome to network page");
+renderUserProfiles();
+fetchRenderHospitals();
+// <<<<<<<<<<< running when my script loads

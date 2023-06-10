@@ -8,7 +8,7 @@
         <form action="/profile/updateProfilePhoto" method="POST" enctype="multipart/form-data" class="row">
             @csrf
             <div class="col-lg-3">
-                <img id="user_photo" class="rounded-circle" src="{{$profile->getPhoto()}}" alt="user name"
+                <img id="user_photo" class="rounded-circle" src="{{ $profile->getPhoto() }}" alt="user name"
                     width="100px" height="100px">
             </div>
             <div class="col-lg-4">
@@ -80,8 +80,13 @@
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">
                     <i class="fa-solid fa-briefcase me-1"></i>Department</span>
-                <input disabled name="department" type="text" class="form-control"
-                    value="{{ $profile->department }}">
+                <select disabled name="department" type="text" class="form-control">
+                    @foreach ($hospitalDepartments as $key => $value)
+                        <option @if ($key == $profile->department) selected @endif value="{{$key}}">
+                            {{ $value }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
             <div class="input-group mb-4">
                 <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold"><i
@@ -100,8 +105,17 @@
             <div class="input-group mb-4">
                 <span class="input-group-text text-custom-primary fw-bold text-custom-dark">
                     <i class="fa-solid fa-hospital me-1"></i>Hospital</span>
-                <input disabled name="hospital" type="text" class="form-control"
-                    value="{{ $profile->hospital }}">
+                <select id="hospitals-select" disabled name="hospital" type="text" class="form-control">
+                    @foreach ($hospitals as $key => $value)
+                        <option @if ($key == $profile->hospital) selected @endif value="{{ $key }}">
+                            {{ $value }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div id="other-hospital" hidden class="input-group mb-4">
+                <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Other Hospital</span>
+                <input disabled required name="other_hospital" type="text" class="form-control" value="{{$profile->other_hospital}}">
             </div>
             <button class="btn btn-custom-primary text-white col-4 col-md-3" type="submit">Save Changes</button>
             <button id="edit-career-btn" class="btn btn-outline-custom-primary col-4 col-md-3"

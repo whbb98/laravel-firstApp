@@ -7,6 +7,7 @@ use App\Http\Controllers\CareerController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NotificationSettingsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserNetworkController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -117,7 +118,7 @@ Route::post(
 )->middleware("CheckLogin");
 
 Route::get(
-    "/profile/dropProfileCareerRow",
+    "/profile/dropProfileCareerRow/{id}",
     [CareerController::class, "dropProfileCareerRow"]
 )->middleware("CheckLogin");
 
@@ -145,10 +146,14 @@ Route::post(
     "/profile/updatePassword",
     [UserController::class, "updatePassword"]
 )->middleware("CheckLogin")->name("updatePassword-form");
-
-
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<< User Profile Forms
 
+// >>>>>>>>>>>>>>>>>>>>>>>>>> User Network Routes
+Route::get(
+    "/network/getAllHospitals",
+    [UserNetworkController::class, "getAllHospitals"]
+)->middleware("CheckLogin");
+// <<<<<<<<<<<<<<<<<<<<<<<<<< User Network Routes
 
 
 

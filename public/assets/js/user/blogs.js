@@ -103,8 +103,10 @@ $("#bp-list").click(function (e) {
 $("#has_meeting").change(function () {
     if (this.checked) {
         $("#has-meeting-input").prop("disabled", false);
+        $("#has-meeting-url").prop("disabled", false);
     } else {
         $("#has-meeting-input").prop("disabled", true);
+        $("#has-meeting-url").prop("disabled", true);
     }
 });
 

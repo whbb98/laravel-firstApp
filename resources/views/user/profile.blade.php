@@ -20,6 +20,10 @@
         .ptr-cursor {
             cursor: pointer;
         }
+
+        #career-data tr:hover {
+            cursor: not-allowed;
+        }
     </style>
 @endsection
 @php
@@ -45,7 +49,7 @@
             <h6 class="text-capitalize">
                 <span>{{ $profile->occupation }}</span>
             </h6>
-            <span class="text-capitalize">{{ $profile->department }}</span>
+            <span class="text-capitalize">{{ $hospitalDepartments[$profile->department] }}</span>
         </div>
     </div>
     {{-- >>>>>>>>>>>>>>>>>>>>>>> displaying status messages --}}
@@ -92,6 +96,11 @@
     @if ($errors->has('hospital'))
         <div class="mt-2 alert alert-danger">
             {{ $errors->first('hospital') }}
+        </div>
+    @endif
+    @if ($errors->has('other-hospital'))
+        <div class="mt-2 alert alert-danger">
+            {{ $errors->first('other-hospital') }}
         </div>
     @endif
     @if ($errors->has('city'))

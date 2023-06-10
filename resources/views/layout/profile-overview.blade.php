@@ -10,7 +10,9 @@
     </div>
     <div class="">
         <i class="fa-solid fa-hospital text-custom-primary fa-xl"></i>
-        <span class="fs-6 text-capitalize">{{ $profile->hospital }}</span>
+        <span class="fs-6 text-capitalize">
+            {{ $profile->hospital == '0' ? $profile->other_hospital : $hospitals[$profile->hospital] }}
+        </span>
     </div>
     <div class="">
         <i class="fa-solid fa-calendar text-custom-primary fa-xl"></i>
