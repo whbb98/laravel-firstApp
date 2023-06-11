@@ -10,7 +10,7 @@ class MLPredictions extends Model
 {
     use HasFactory;
     protected $table = 'ml_predictions';
-    protected $primaryKey = ['blog_id', 'image_id'];
+    protected $primaryKey = 'id';
     public $incrementing = false;
     public $timestamps = false;
 

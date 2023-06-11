@@ -60,4 +60,49 @@ class Blog extends Model
     {
         return $this->hasOne(BlogFeedback::class);
     }
+
+    public static function suggestParticipants($query)
+    {
+        $users = User::where(function ($q) use ($query) {
+            $q->where('username', 'LIKE', "%{$query}%")
+                ->orWhere('first_name', 'LIKE', "%{$query}%")
+                ->orWhere('last_name', 'LIKE', "%{$query}%")
+                ->orWhere('email', 'LIKE', "%{$query}%");
+        })
+            ->with('profile')
+            ->get();
+
+        $filteredUsers = [];
+
+        foreach ($users as $user) {
+            $filteredUsers[] = [
+                'id' => $user->id,
+                'username' => $user->username,
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
+                'email' => $user->email,
+                'profile' => [
+                    'photo' => $user->profile->getPhoto(),
+                    'occupation' => $user->profile->occupation,
+                    'department' => $user->profile->getDpartmentName(),
+                    'hospital' => $user->profile->getHospitalName(),
+                    'city' => $user->profile->getCityName()
+                ]
+            ];
+        }
+
+        return json_encode($filteredUsers);
+    }
+
+
+    public function
+    createBlog($title, $description, $datetime, $has_meeting, $user_id)
+    {
+        $this->title = trim($title);
+        $this->description = trim($description);
+        $this->datetime = $datetime;
+        $this->has_meeting = $has_meeting;
+        $this->user_id = $user_id;
+        return $this->save();
+    }
 }

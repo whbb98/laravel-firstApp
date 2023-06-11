@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\testing;
 use App\Http\Controllers\UserAuthController;
@@ -155,6 +156,17 @@ Route::get(
 )->middleware("CheckLogin")->name("user-search-form");
 // <<<<<<<<<<<<<<<<<<<<<<<<<< User Network Routes
 
+// >>>>>>>>>>>>>>>>>>>>>>>>>>> Blog Routes
+Route::post(
+    "/blogs/createBlog",
+    [BlogController::class, "createBlog"]
+)->middleware("CheckLogin")->name("createBlog-form");
+
+Route::get(
+    "/blogs/suggestParticipants",
+    [BlogController::class, "suggestParticipants"]
+)->middleware("CheckLogin");
+// <<<<<<<<<<<<<<<<<<<<<<<<<<< Blog Routes
 
 
 

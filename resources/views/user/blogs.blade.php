@@ -66,6 +66,13 @@
             overflow-y: auto;
             overflow-x: hidden;
         }
+
+        #search-suggestions {
+            display: none;
+            width: 50%;
+            max-height: 200px;
+            overflow: auto;
+        }
     </style>
 @endsection
 
@@ -89,7 +96,19 @@
             Create Blog
         </button>
     </div>
+    {{-- >>>>>>>>>>>>>>>>>>>>>>> displaying status messages --}}
+    @if (session('success'))
+        <div class="mt-2 alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
+    @if (session('error'))
+        <div class="mt-2 alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+    {{-- <<<<<<<<<<<<<<<<<<<<<<< displaying status messages --}}
     <div class="blogs text-custom-dark">
         <div id="10" data-blog-type="pending" class="blog card p-0 bg-custom-secondary">
             <img class="card-img-top" src="https://picsum.photos/500/500" alt="blog img">
@@ -161,7 +180,9 @@
 <div class="modal fade modal-xl" id="blog-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form id="blog-form" action="" method="POST" enctype="multipart/form-data" class="modal-content">
+        <form id="blog-form" action="{{ route('createBlog-form') }}" method="POST" enctype="multipart/form-data"
+            class="modal-content">
+            @csrf
             <div class="modal-header">
                 <h1 class="modal-title fs-5 text-custom-primary" id="staticBackdropLabel">
                     Create New Blog
@@ -173,13 +194,14 @@
                         <label for="b-title" class="form-label fw-bold">
                             Blog Title: <span class="text-custom-warning fw-bold">*</span>
                         </label>
-                        <input required name="blog-title" type="text" class="form-control" id="b-title">
+                        <input required name="blog_title" type="text" class="form-control" id="b-title"
+                            value="{{ old('blog_title') }}">
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="b-description" class="form-label fw-bold">
                             Description: <span class="text-custom-warning fw-bold">*</span>
                         </label>
-                        <textarea required name="blog-description" class="form-control" id="b-description"></textarea>
+                        <textarea required name="blog_description" class="form-control" id="b-description">{{ old('blog_description') }}</textarea>
                     </div>
                     <div class="mb-3 mt-3">
                         <label for="b-participants" class="form-label fw-bold">
@@ -187,27 +209,17 @@
                         </label>
                         <input type="text" class="form-control" id="bp-input"
                             placeholder="Participant (Name, Email, Username)">
+                        {{-- ++++++++++++++ --}}
+                        <div id="search-suggestions" class="dropdown-menu mt-2 col-auto"></div>
+                        {{-- ++++++++++++++++ --}}
+                        <input type="hidden" id="participants-input" name="participants">
                         <div class="bg-custom-secondary rounded row text-capitalize mt-2">
                             <span class="col-2 fw-bold">username</span>
                             <span class="col-4 fw-bold">full name</span>
                             <span class="col-6 fw-bold">email</span>
                         </div>
                         <ul id="bp-list" class="participants-list list-unstyled mt-1">
-                            <li class="row mb-1 rounded">
-                                <span class="col-2">user-01</span>
-                                <span data-type="email" class="col-4">abdelouahab one</span>
-                                <span class="col-6">u1@gmail.com</span>
-                            </li>
-                            <li class="row mb-1 rounded">
-                                <span class="col-2">user-02</span>
-                                <span data-type="email" class="col-4">abdelouahab two</span>
-                                <span class="col-6">u2@gmail.com</span>
-                            </li>
-                            <li class="row mb-1 rounded">
-                                <span class="col-2">user-03</span>
-                                <span data-type="email" class="col-4">abdelouahab three</span>
-                                <span class="col-6">u3@gmail.com</span>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -218,19 +230,16 @@
                         <label for="has_meeting" class="form-label fw-bold ms-1">
                             Schedule a Meeting
                         </label>
-                        <input id="has-meeting-input" disabled name="meeting-date" type="datetime-local"
+                        <input id="has-meeting-input" disabled name="meeting_datetime" type="datetime-local"
                             class="form-control" required>
-                        <input id="has-meeting-url" disabled name="meeting-url" type="url"
+                        <input id="has-meeting-url" disabled name="meeting_url" type="url"
                             class="form-control mt-2" required placeholder="https://meet.google.com/abcd123">
                     </div>
                     <div class="mb-3 mt-3">
-                        <p class="form-label">file format that are supported are: jpg, jpeg, png
+                        <p class="form-label fw-bold text-warning">
+                            Only Images are Supported!
                         </p>
-                        <input id="files_input" name="files" multiple type="file" class="d-none" required>
-                        <button id="upload-btn" type="button" class="btn btn-custom-primary text-white">
-                            <i class="fa-sharp fa-solid fa-x-ray"></i>
-                            Upload Files
-                        </button>
+                        <input id="files_input" name="files[]" multiple type="file" class="" required>
                     </div>
                 </div>
             </div>

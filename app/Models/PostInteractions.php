@@ -10,7 +10,7 @@ class PostInteractions extends Model
 {
     use HasFactory;
     protected $table = 'post_interactions';
-    protected $primaryKey = ['post_id', 'user_id'];
+    protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
 

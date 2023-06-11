@@ -14,7 +14,7 @@ class UserNetwork extends Model
 {
     use HasFactory;
     protected $table = 'user_network';
-    protected $primaryKey = ['sender', 'receiver'];
+    protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
 

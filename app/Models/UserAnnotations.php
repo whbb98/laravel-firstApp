@@ -10,7 +10,7 @@ class UserAnnotations extends Model
 {
     use HasFactory;
     protected $table = 'user_annotations';
-    protected $primaryKey = ['user_id', 'blog_id', 'image_id'];
+    protected $primaryKey = 'id';
     public $incrementing = false;
     public $timestamps = false;
 

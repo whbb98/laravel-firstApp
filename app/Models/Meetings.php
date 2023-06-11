@@ -18,4 +18,12 @@ class Meetings extends Model
     {
         return $this->belongsTo(Blog::class);
     }
+
+    public function createMeeting($blog_id, $datetime, $url)
+    {
+        $this->blog_id = $blog_id;
+        $this->scheduled = $datetime;
+        $this->link = $url;
+        return $this->save();
+    }
 }

@@ -35,4 +35,14 @@ class BlogImages extends Model
     {
         return $this->hasOne(MLAnnotations::class, 'image_id');
     }
+
+    public function insertBlogImage($file)
+    {
+        $this->image_name = $file->getClientOriginalName();
+        $this->type = $file->getClientMimeType();
+        $this->hash_key = hash('sha256', $file->path());
+        $this->image_binary = file_get_contents($file->path());
+        $status = $this->save();
+        return $status;
+    }
 }

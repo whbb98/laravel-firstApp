@@ -10,7 +10,7 @@ class BlogParticipate extends Model
 {
     use HasFactory;
     protected $table = 'blog_participate';
-    protected $primaryKey = ['blog_id', 'user_id'];
+    protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
 
@@ -22,5 +22,17 @@ class BlogParticipate extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function inviteParticipant($email)
+    {
+        $user = User::where('email', $email)->first();
+        if ($user) {
+            $this->user_id = $user->id;
+            $this->status = -1;
+            return $this->save();
+        } else {
+            return false;
+        }
     }
 }

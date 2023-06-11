@@ -87,9 +87,6 @@ class User extends Model
     {
         return $this->hasMany(Notifications::class, "receiver");
     }
-    // $user = User::find(1);
-    // $sentNotifications = $user->sentNotifications;
-    // $receivedNotifications = $user->receivedNotifications;
 
     public function blogs(): HasMany
     {
