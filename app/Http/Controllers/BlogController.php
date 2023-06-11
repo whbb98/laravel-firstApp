@@ -53,20 +53,18 @@ class BlogController extends Controller
             $participants = json_decode($validated['participants']);
             foreach ($participants as $email) {
                 $blogParticipate = new BlogParticipate();
-                // $blogParticipate->blog_id = $blog->id;
+                $blogParticipate->blog_id = $blog->id;
                 $blogParticipate->inviteParticipant($email);
             }
-            echo 'thanks';
-            // 
-
+            $status = true;
         } catch (\Illuminate\Validation\ValidationException $e) {
             $status = false;
         }
-        // if ($status) {
-        //     return redirect()->back()->with('success', 'Blog created successfully.');
-        // } else {
-        //     return redirect()->back()->with('error', 'Failed to create Blog.')->withInput();
-        // }
+        if ($status) {
+            return redirect()->back()->with('success', 'Blog created successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to create Blog.')->withInput();
+        }
     }
 
     public function suggestParticipants(Request $request)

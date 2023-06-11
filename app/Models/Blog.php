@@ -98,8 +98,8 @@ class Blog extends Model
     public function
     createBlog($title, $description, $datetime, $has_meeting, $user_id)
     {
-        $this->title = trim($title);
-        $this->description = trim($description);
+        $this->title = trim(strip_tags($title));
+        $this->description = trim(strip_tags($description));
         $this->datetime = $datetime;
         $this->has_meeting = $has_meeting;
         $this->user_id = $user_id;
