@@ -31,12 +31,12 @@
 @endphp
 
 <body>
-    {{-- start header --}}
+
+    {{-- end header --}}
     <header class="p-3 mb-3 border-bottom">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
-                <a href="/home"
-                    class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+                <a href="/home" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
                     <img src="logo.svg" alt="logo" width="50px">
                     <span class="fs-4 ms-2 text-capitalize text-custom-primary fw-bold">doctor ai collab</span>
                 </a>
@@ -117,8 +117,6 @@
                 </div>
             </div>
     </header>
-    {{-- end header --}}
-
     {{-- start page content --}}
     <div class="container">
         <div class="row min-vh-100">

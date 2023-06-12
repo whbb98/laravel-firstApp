@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,10 +18,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/blog.css') }}">
     <script defer src="{{ asset('assets/js/user/blog.js') }}"></script>
     <link rel="icon" type="image/x-icon" href="/assets/favicons/blog-icon.svg">
-    <title>Blog View {{$id}}</title>
+    <title>Blog View {{ $id }}</title>
 </head>
 
 <body>
+
     <div class="container">
         <div class="mt-5 blog text-custom-dark">
             <div class="blog-header">
