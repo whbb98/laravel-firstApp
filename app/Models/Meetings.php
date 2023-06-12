@@ -26,4 +26,55 @@ class Meetings extends Model
         $this->link = $url;
         return $this->save();
     }
+
+    public function validateDateTime($value)
+    {
+        return strtotime($value) > time();
+    }
+
+    public static function fetchMeetings()
+    {
+        $user = User::find(session('userid'));
+        $participations = $user->blogParticipations;
+        $blogIds = $participations->pluck('blog_id')->toArray();
+        $meetings = Meetings::whereIn('blog_id', $blogIds)->get();
+        $filteredMeetings = [];
+        foreach ($meetings as $meeting) {
+            $filtered =  [
+                'id' => $meeting->id,
+                'blog_id' => $meeting->blog_id,
+                'link' => $meeting->link,
+                'title' => Blog::find($meeting->blog_id)->title,
+                'date' => $meeting->scheduled,
+                'participants' => BlogParticipate::where('blog_id', $meeting->blog_id)->count(),
+                'status' => (strtotime($meeting->scheduled) > time()) ? 'scheduled' : 'happened',
+                'cover' => BlogImages::where('blog_id', $meeting->blog_id)->inRandomOrder()->first()->getPhoto()
+            ];
+            $filteredMeetings[] = $filtered;
+        }
+        return $filteredMeetings;
+    }
+
+    public static function fetchUserMeetings()
+    {
+        $user = User::find(session('userid'));
+        $blogs = $user->blogs;
+        $blogIds = $blogs->pluck('id')->toArray();
+        $meetings = Meetings::whereIn('blog_id', $blogIds)->get();
+        $filteredMeetings = [];
+        foreach ($meetings as $meeting) {
+            $filtered =  [
+                'id' => $meeting->id,
+                'blog_id' => $meeting->blog_id,
+                'link' => $meeting->link,
+                'title' => Blog::find($meeting->blog_id)->title,
+                'date' => $meeting->scheduled,
+                'participants' => BlogParticipate::where('blog_id', $meeting->blog_id)->count(),
+                'status' => (strtotime($meeting->scheduled) > time()) ? 'scheduled' : 'happening',
+                'cover' => BlogImages::where('blog_id', $meeting->blog_id)->inRandomOrder()->first()->getPhoto()
+            ];
+            $filteredMeetings[] = $filtered;
+        }
+        return $filteredMeetings;
+    }
 }

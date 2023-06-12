@@ -1,8 +1,11 @@
 @extends('layout.user-page')
 @section('title', 'Blogs')
 @php
+    use App\Models\Blog;
     $active_page_number = 5;
     $favicon_url = 'assets/favicons/blog-icon.svg';
+    $userBlogs = Blog::fetchUserBlogs();
+    $participateBlogs = Blog::fetchParticipateBlogs();
 @endphp
 
 
@@ -110,69 +113,54 @@
     @endif
     {{-- <<<<<<<<<<<<<<<<<<<<<<< displaying status messages --}}
     <div class="blogs text-custom-dark">
-        <div id="10" data-blog-type="pending" class="blog card p-0 bg-custom-secondary">
-            <img class="card-img-top" src="https://picsum.photos/500/500" alt="blog img">
-            <div class="card-body">
-                <span><i class="fa-solid fa-calendar-days"></i> 2022-04-02</span>
-                <h6 class="blog-title mt-2">pending, ipsum dolor sit amet consectetur adipisicing elit. Expedita, nobis.
-                </h6>
+        {{-- fetching my blogs --}}
+        @foreach ($userBlogs as $blog)
+            <div data-blog-type="{{ $blog['status'] }}" class="blog card p-0 bg-custom-secondary">
+                <img class="card-img-top" src="{{ $blog['cover'] }}" alt="blog img" style="width:250px;height:150">
+                <div class="card-body">
+                    <span><i class="fa-solid fa-calendar-days"></i>
+                        {{ $blog['datetime'] }}
+                    </span>
+                    <h6 class="blog-title mt-2">
+                        {{ $blog['title'] }}
+                    </h6>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <span><i class="fa-solid fa-user-group"></i>
+                        {{ $blog['participants'] }}
+                    </span>
+                    <span><i class="fa-solid fa-message"></i>
+                        {{ $blog['commentsCount'] }}
+                    </span>
+                    <a href="/blog/{{ $blog['blog_id'] }}" target="_blank" class="fw-bold text-custom-primary">Read More</a>
+                </div>
             </div>
-            <div class="card-footer d-flex justify-content-between">
-                <span><i class="fa-solid fa-user-group"></i> 53</span>
-                <span><i class="fa-solid fa-message"></i> 33</span>
-                <a href="/blog/10" target="_blank" class="fw-bold text-custom-primary">Read More</a>
+        @endforeach
+        {{-- fetching other blogs --}}
+        @foreach ($participateBlogs as $blog)
+            <div data-blog-type="{{ $blog['status'] == -1 ? 'pending' : 'participate' }}"
+                class="blog card p-0 bg-custom-secondary">
+                <img class="card-img-top" src="{{ $blog['cover'] }}" alt="blog img" style="width:250px;height:150">
+                <div class="card-body">
+                    <span><i class="fa-solid fa-calendar-days"></i>
+                        {{ $blog['datetime'] }}
+                    </span>
+                    <h6 class="blog-title mt-2">
+                        {{ $blog['title'] }}
+                    </h6>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <span><i class="fa-solid fa-user-group"></i>
+                        {{ $blog['participants'] }}
+                    </span>
+                    <span><i class="fa-solid fa-message"></i>
+                        {{ $blog['commentsCount'] }}
+                    </span>
+                    <a href="/blog/{{ $blog['blog_id'] }}" target="_blank" class="fw-bold text-custom-primary">Read
+                        More</a>
+                </div>
             </div>
-        </div>
-        <div id="20" data-blog-type="mine" class="blog card p-0 bg-custom-secondary">
-            <img class="card-img-top" src="https://picsum.photos/500/500" alt="blog img">
-            <div class="card-body">
-                <span><i class="fa-solid fa-calendar-days"></i> 2022-04-02</span>
-                <h6 class="blog-title mt-2">mine, ipsum dolor sit amet consectetur adipisicing elit. Expedita, nobis.</h6>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-                <span><i class="fa-solid fa-user-group"></i> 53</span>
-                <span><i class="fa-solid fa-message"></i> 33</span>
-                <a href="/blog/20" target="_blank" class="fw-bold text-custom-primary">Read More</a>
-            </div>
-        </div>
-        <div id="30" data-blog-type="participate" class="blog card p-0 bg-custom-secondary">
-            <img class="card-img-top" src="https://picsum.photos/500/500" alt="blog img">
-            <div class="card-body">
-                <span><i class="fa-solid fa-calendar-days"></i> 2022-04-02</span>
-                <h6 class="blog-title mt-2">participate, ipsum dolor sit amet consectetur adipisicing elit. Expedita, nobis.
-                </h6>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-                <span><i class="fa-solid fa-user-group"></i> 53</span>
-                <span><i class="fa-solid fa-message"></i> 33</span>
-                <a href="/blog/30" target="_blank" class="fw-bold text-custom-primary">Read More</a>
-            </div>
-        </div>
-        <div id="40" data-blog-type="mine" class="blog card p-0 bg-custom-secondary">
-            <img class="card-img-top" src="https://picsum.photos/500/500" alt="blog img">
-            <div class="card-body">
-                <span><i class="fa-solid fa-calendar-days"></i> 2022-04-02</span>
-                <h6 class="blog-title mt-2">mine, ipsum dolor sit amet consectetur adipisicing elit. Expedita, nobis.</h6>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-                <span><i class="fa-solid fa-user-group"></i> 53</span>
-                <span><i class="fa-solid fa-message"></i> 33</span>
-                <a href="/blog/40" target="_blank" class="fw-bold text-custom-primary">Read More</a>
-            </div>
-        </div>
-        <div id="50" data-blog-type="pending" class="blog card p-0 bg-custom-secondary">
-            <img class="card-img-top" src="https://picsum.photos/500/500" alt="blog img">
-            <div class="card-body">
-                <span><i class="fa-solid fa-calendar-days"></i> 2022-04-02</span>
-                <h6 class="blog-title mt-2">pending, ipsum dolor sit amet consectetur adipisicing elit. Expedita, nobis.
-                </h6>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-                <span><i class="fa-solid fa-user-group"></i> 53</span>
-                <span><i class="fa-solid fa-message"></i> 33</span>
-                <a href="/blog/50" target="_blank" class="fw-bold text-custom-primary">Read More</a>
-            </div>
-        </div>
+        @endforeach
     </div>
 @endsection
 {{-- >>>>>>>>>>>>>modal add new blog------------ --}}
@@ -237,7 +225,7 @@
                     </div>
                     <div class="mb-3 mt-3">
                         <p class="form-label fw-bold text-warning">
-                            Only Images are Supported!
+                            Only Images are Supported! 'max size per image 5MB'
                         </p>
                         <input id="files_input" name="files[]" multiple type="file" class="" required>
                     </div>

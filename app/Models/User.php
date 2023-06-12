@@ -130,4 +130,5 @@ class User extends Model
         $this->password = Hash::make($new_password);
         return $this->save();
     }
+    
 }

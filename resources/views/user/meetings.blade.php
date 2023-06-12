@@ -3,6 +3,10 @@
 @php
     $active_page_number = 6;
     $favicon_url = 'assets/favicons/calendar-check-icon.svg';
+    use App\Models\Meetings;
+    $otherMeetings = Meetings::fetchMeetings();
+    $userMeetings = Meetings::fetchUserMeetings();
+    
 @endphp
 
 @section('style')
@@ -61,53 +65,56 @@
             All
         </button>
         <button id="btn-scheduled" class="btn btn-outline-custom-primary rounded-pill me-2">
+            <i class="fa-solid fa-video text-custom-warning"></i>
             Scheduled
         </button>
         <button id="btn-happening" class="btn btn-outline-custom-primary rounded-pill me-2">
-            <i class="fa-solid fa-video text-custom-warning"></i> Happening
+             Happened
         </button>
     </div>
 
     <div class="meetings text-custom-dark">
-        <div id="10" data-meeting-type="scheduled" class="meeting card p-0 bg-custom-secondary">
-            <img class="card-img-top" src="https://picsum.photos/500/500" alt="meeting img">
-            <div class="card-body">
-                <span><i class="fa-solid fa-calendar-days"></i> 2022-04-02</span>
-                <h6 class="meeting-title mt-2">scheduled, ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-                    nobis.
-                </h6>
+        {{-- fetch my meetings --}}
+        @foreach ($userMeetings as $meeting)
+            <div id="10" data-meeting-type="{{ $meeting['status'] }}" class="meeting card p-0 bg-custom-secondary">
+                <img class="card-img-top" src="{{ $meeting['cover'] }}" alt="meeting img" style="width:250px;height:150">
+                <div class="card-body">
+                    <span><i class="fa-solid fa-calendar-days"></i>
+                        {{ $meeting['date'] }}
+                    </span>
+                    <h6 class="meeting-title mt-2">
+                        {{ $meeting['title'] }}
+                    </h6>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <span><i class="fa-solid fa-user-group"></i>
+                        {{ $meeting['participants'] }}
+                    </span>
+                    <a href="{{ $meeting['link'] }}" target="_blank" class="btn btn-outline-custom-primary">Join Meeting</a>
+                </div>
             </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <span><i class="fa-solid fa-user-group"></i> 53</span>
-                <a href="/meeting/10" target="_blank" class="btn btn-outline-custom-primary">Join Meeting</a>
+        @endforeach
+        {{-- fetch other meetings --}}
+        @foreach ($otherMeetings as $meeting)
+            <div id="10" data-meeting-type="{{ $meeting['status'] }}" class="meeting card p-0 bg-custom-secondary">
+                <img class="card-img-top" src="{{ $meeting['cover'] }}" alt="meeting img" style="width:250px;height:150">
+                <div class="card-body">
+                    <span><i class="fa-solid fa-calendar-days"></i>
+                        {{ $meeting['date'] }}
+                    </span>
+                    <h6 class="meeting-title mt-2">
+                        {{ $meeting['title'] }}
+                    </h6>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <span><i class="fa-solid fa-user-group"></i>
+                        {{ $meeting['participants'] }}
+                    </span>
+                    <a href="{{ $meeting['link'] }}" target="_blank" class="btn btn-outline-custom-primary">Join
+                        Meeting</a>
+                </div>
             </div>
-        </div>
-        <div id="20" data-meeting-type="happening" class="meeting card p-0 bg-custom-secondary">
-            <img class="card-img-top" src="https://picsum.photos/500/500" alt="meeting img">
-            <div class="card-body">
-                <span><i class="fa-solid fa-calendar-days"></i> 2022-04-02</span>
-                <h6 class="meeting-title mt-2">happening, ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-                    nobis.
-                </h6>
-            </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <span><i class="fa-solid fa-user-group"></i> 53</span>
-                <a href="/meeting/20" target="_blank" class="btn btn-outline-custom-primary">Join Meeting</a>
-            </div>
-        </div>
-        <div id="30" data-meeting-type="scheduled" class="meeting card p-0 bg-custom-secondary">
-            <img class="card-img-top" src="https://picsum.photos/500/500" alt="meeting img">
-            <div class="card-body">
-                <span><i class="fa-solid fa-calendar-days"></i> 2022-04-02</span>
-                <h6 class="meeting-title mt-2">scheduled, ipsum dolor sit amet consectetur adipisicing elit. Expedita,
-                    nobis.
-                </h6>
-            </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <span><i class="fa-solid fa-user-group"></i> 53</span>
-                <a href="/meeting/30" target="_blank" class="btn btn-outline-custom-primary">Join Meeting</a>
-            </div>
-        </div>
+        @endforeach
     </div>
 @endsection
 

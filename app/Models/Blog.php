@@ -105,4 +105,46 @@ class Blog extends Model
         $this->user_id = $user_id;
         return $this->save();
     }
+
+    public static function fetchUserBlogs()
+    {
+        $user = User::find(session('userid'));
+        $blogs = $user->blogs;
+        $filteredBlogs = [];
+        foreach ($blogs as $blog) {
+            $filtered =  [
+                'blog_id' => $blog->id,
+                'title' => $blog->title,
+                'datetime' => $blog->datetime,
+                'participants' => BlogParticipate::where('blog_id', $blog->id)->count(),
+                'commentsCount' => 12,
+                'status' => 'mine',
+                'cover' => BlogImages::where('blog_id', $blog->id)->inRandomOrder()->first()->getPhoto()
+            ];
+            $filteredBlogs[] = $filtered;
+        }
+        return $filteredBlogs;
+    }
+
+    public static function fetchParticipateBlogs()
+    {
+        $user = User::find(session('userid'));
+        $participations = $user->blogParticipations;
+        $blogIds = $participations->pluck('blog_id')->toArray();
+        $blogs = Blog::whereIn('id', $blogIds)->get();
+        $filteredBlogs = [];
+        foreach ($blogs as $blog) {
+            $filtered =  [
+                'blog_id' => $blog->id,
+                'title' => $blog->title,
+                'datetime' => $blog->datetime,
+                'participants' => BlogParticipate::where('blog_id', $blog->id)->count(),
+                'commentsCount' => 12,
+                'status' => BlogParticipate::where('blog_id', $blog->id)->where('user_id', $user->id)->value('status'),
+                'cover' => BlogImages::where('blog_id', $blog->id)->inRandomOrder()->first()->getPhoto()
+            ];
+            $filteredBlogs[] = $filtered;
+        }
+        return $filteredBlogs;
+    }
 }

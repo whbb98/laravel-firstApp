@@ -45,4 +45,10 @@ class BlogImages extends Model
         $status = $this->save();
         return $status;
     }
+
+    public function getPhoto()
+    {
+        $base64Photo = base64_encode($this->image_binary);
+        return "data:image/jpeg;base64," . $base64Photo;
+    }
 }

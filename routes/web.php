@@ -59,16 +59,6 @@ Route::get("/notifications", function () {
     return view("user.notifications");
 })->middleware("CheckLogin");
 
-Route::get("/blogs", function () {
-    return view("user.blogs");
-})->middleware("CheckLogin");
-
-Route::get("/blog", function ($id = 0) {
-    return view("user.blog", [
-        'id' => $id
-    ]);
-})->middleware("CheckLogin");
-
 Route::get("/meetings", function () {
     return view("user.meetings");
 })->middleware("CheckLogin");
@@ -157,6 +147,12 @@ Route::get(
 // <<<<<<<<<<<<<<<<<<<<<<<<<< User Network Routes
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>> Blog Routes
+Route::get("/blogs", function () {
+    return view("user.blogs");
+})->middleware("CheckLogin")->name("blogs");
+
+Route::get("/blog/{id}", [BlogController::class, "accessBlog"])->middleware("CheckLogin");
+
 Route::post(
     "/blogs/createBlog",
     [BlogController::class, "createBlog"]

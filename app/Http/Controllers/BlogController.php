@@ -7,12 +7,42 @@ use App\Models\BlogImages;
 use App\Models\BlogParticipate;
 use App\Models\Meetings;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
-use function GuzzleHttp\Promise\all;
+use function PHPSTORM_META\map;
 
 class BlogController extends Controller
 {
+
+    public function accessBlog(Request $request)
+    {
+        $id = $request->id;
+        $user = User::find(session('userid'));
+        if (!(is_numeric($id) && $id > 0)) {
+            return redirect()->route("blogs");
+        }
+        $blog = Blog::find($id);
+        if (!$blog) {
+            return redirect()->route("blogs");
+        }
+        $participants = $blog->blogParticipants;
+        $participantsID = [];
+        foreach ($participants as $p) {
+            $participantsID[] = $p->user_id;
+        }
+
+        if ($user->id != $blog->user_id && !in_array($user->id, $participantsID)) {
+            return redirect()->route("blogs");
+        }
+
+        return view("user.blog", [
+            "id" => $id,
+            "participants" => $participantsID,
+            "blog" => $blog
+        ]);
+    }
+
     public function createBlog(Request $request)
     {
         try {
@@ -34,29 +64,40 @@ class BlogController extends Controller
                 'files.*' => 'required|image|max:5048',
                 'participants' => 'required|string',
             ]);
-            // creating new blog
-            $blog = new Blog();
-            $has_meeting = isset($validated['has_meeting']);
-            $status = $blog->createBlog($validated['blog_title'], $validated['blog_description'], now(), $has_meeting, session('userid'));
-            // if has meeting we insert meeting data
-            if ($has_meeting) {
-                $meeting = new Meetings();
-                $status = $meeting->createMeeting($blog->id, $validated['meeting_datetime'], $validated['meeting_url']);
+
+            if ($validated) {
+                // creating new blog
+                $blog = new Blog();
+                $has_meeting = isset($validated['has_meeting']);
+                $blog->createBlog($validated['blog_title'], $validated['blog_description'], now(), $has_meeting, session('userid'));
+                // if has meeting we insert meeting data
+                if ($has_meeting) {
+                    $meeting = new Meetings();
+                    if ($meeting->validateDateTime($validated['meeting_datetime'])) {
+                        $meeting->createMeeting($blog->id, $validated['meeting_datetime'], $validated['meeting_url']);
+                    } else {
+                        $blog->delete();
+                        return redirect()->back()->with('error', 'Meeting date must be in Future')->withInput();
+                    }
+                }
+                // inserting image files 
+                foreach ($request->file('files') as $file) {
+                    $blogImages = new BlogImages();
+                    $blogImages->blog_id = $blog->id;
+                    $blogImages->insertBlogImage($file);
+                }
+                // inviting participants
+                $participants = json_decode($validated['participants']);
+                foreach ($participants as $email) {
+                    $blogParticipate = new BlogParticipate();
+                    $blogParticipate->blog_id = $blog->id;
+                    $blogParticipate->inviteParticipant($email);
+                }
+                $status = true;
+            } else {
+                $status = false;
+                return redirect()->back()->with('error', 'Please verify your input fields!')->withInput();
             }
-            // inserting image files 
-            foreach ($request->file('files') as $file) {
-                $blogImages = new BlogImages();
-                $blogImages->blog_id = $blog->id;
-                $blogImages->insertBlogImage($file);
-            }
-            // inviting participants
-            $participants = json_decode($validated['participants']);
-            foreach ($participants as $email) {
-                $blogParticipate = new BlogParticipate();
-                $blogParticipate->blog_id = $blog->id;
-                $blogParticipate->inviteParticipant($email);
-            }
-            $status = true;
         } catch (\Illuminate\Validation\ValidationException $e) {
             $status = false;
         }

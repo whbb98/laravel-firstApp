@@ -27,12 +27,28 @@ class BlogParticipate extends Model
     public function inviteParticipant($email)
     {
         $user = User::where('email', $email)->first();
-        if ($user) {
+        if ($user && $user->id != (User::find(session('userid')))->id) {
             $this->user_id = $user->id;
             $this->status = -1;
             return $this->save();
-        } else {
-            return false;
         }
+    }
+
+    public function doParticipate()
+    {
+        if ($this->status == -1) {
+            $this->status = 1;
+            return $this->save();
+        }
+        return false;
+    }
+
+    public function dontParticipate()
+    {
+        if ($this->status == -1) {
+            $this->status = 0;
+            return $this->delete();
+        }
+        return false;
     }
 }

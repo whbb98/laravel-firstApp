@@ -18,7 +18,7 @@ $("#btn-happening").click(function (e) {
     $(this).addClass("active");
     $(".meeting").hide();
     $(".meeting").filter(function () {
-        return $(this).data("meeting-type") === "happening"
+        return $(this).data("meeting-type") === "happened"
     }).show()
 });
 
