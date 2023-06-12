@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+@php
 
+@endphp
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,16 +28,17 @@
     <div class="container">
         <div class="mt-5 blog text-custom-dark">
             <div class="blog-header">
-                <h3 class="mb-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit !
+                <h3 class="mb-3">
+                    {{$blog->title}}
                 </h3>
                 <div class="mb-4">
-                    <span class="fs-5 fw-bold me-5">
+                    <span class="fs-5 fw-bold me-5 text-capitalize">
                         <i class="fa-solid fa-user-doctor"></i>
-                        Dr John Doe
+                        {{$blog->user->first_name ." ". $blog->user->last_name}}
                     </span>
                     <span class="fs-5 fw-bold">
                         <i class="fa-solid fa-calendar-days"></i>
-                        dd-mm-yyyy
+                        {{$blog->datetime}}
                     </span>
                 </div>
             </div>
@@ -48,14 +51,16 @@
                         <span class="fw-bold ms-2 d-none d-lg-inline-block">Filter by Doctor</span>
                     </div>
                     <ul id="users-list" class="list-unstyled">
+                        {{-- me --}}
                         <li id="user-1" data-userid="1998" class="mb-2 rounded active">
-                            <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
+                            <img src="{{$user->profile->getPhoto()}}"
                                 title="user 1" class="rounded-circle">
                             &nbsp;
                             <span class="d-none d-md-block">
-                                {{ '@me' }}
+                                {{ $user->first_name }}
                             </span>
                         </li>
+                        {{-- blog participants --}}
                         @for ($i = 2; $i < 5; $i++)
                             <li id="user-{{ $i }}" data-userid="{{ $i * 10 }}" class="mb-2 rounded">
                                 <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
@@ -66,6 +71,7 @@
                                 </span>
                             </li>
                         @endfor
+                        {{-- ------------------ --}}
                     </ul>
                 </div>
                 <div class="blog-slider bg-custom-secondary col rounded-end">
@@ -115,15 +121,7 @@
             </div>
             <div class="description mt-5">
                 <h4>Description</h4>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo repudiandae iusto
-                    corporis nulla consequuntur inventore dicta minus exercitationem necessitatibus fugit nihil
-                    assumenda provident, nemo rerum ducimus impedit labore? Eum quo ipsam distinctio tenetur quam
-                    accusamus hic nobis quaerat dolor voluptates exercitationem tempora veniam a, maiores nesciunt? Quos
-                    explicabo laborum dolore ipsam, a aspernatur accusamus? Necessitatibus cumque consectetur mollitia
-                    error, esse, sequi excepturi at ab delectus culpa dolor quo voluptate. Reprehenderit dolorem sequi
-                    fuga repudiandae atque fugiat, placeat perspiciatis eligendi necessitatibus in minus omnis? Nesciunt
-                    itaque perspiciatis quaerat adipisci nostrum omnis quam illum in neque, dolorem rerum maiores.
-                    Neque, quia fuga.</p>
+                <p class="lead">{{$blog->description}}</p>
             </div>
             {{-- ----------------AI Predictions ----------------- --}}
             <div class="ai-predictions p-2 rounded" data-bs-toggle="collapse" data-bs-target="#ai-predictions">

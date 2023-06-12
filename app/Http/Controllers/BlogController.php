@@ -8,6 +8,7 @@ use App\Models\BlogParticipate;
 use App\Models\Meetings;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 use function PHPSTORM_META\map;
@@ -26,6 +27,9 @@ class BlogController extends Controller
         if (!$blog) {
             return redirect()->route("blogs");
         }
+        // Carbon::createFromFormat('Y-m-d H:i:s', $blog->datetime)->format('Y F d H:i');
+        $datetime = Carbon::createFromFormat('Y-m-d H:i:s', $blog->datetime);
+        $blog->datetime = $datetime->format('Y F d H:i');
         $participants = $blog->blogParticipants;
         $participantsID = [];
         foreach ($participants as $p) {
@@ -39,7 +43,8 @@ class BlogController extends Controller
         return view("user.blog", [
             "id" => $id,
             "participants" => $participantsID,
-            "blog" => $blog
+            "blog" => $blog,
+            "user" => $user
         ]);
     }
 

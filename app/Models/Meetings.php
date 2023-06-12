@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -45,7 +46,7 @@ class Meetings extends Model
                 'blog_id' => $meeting->blog_id,
                 'link' => $meeting->link,
                 'title' => Blog::find($meeting->blog_id)->title,
-                'date' => $meeting->scheduled,
+                'date' => Carbon::createFromFormat('Y-m-d H:i:s', $meeting->scheduled)->format('Y F d H:i'),
                 'participants' => BlogParticipate::where('blog_id', $meeting->blog_id)->count(),
                 'status' => (strtotime($meeting->scheduled) > time()) ? 'scheduled' : 'happened',
                 'cover' => BlogImages::where('blog_id', $meeting->blog_id)->inRandomOrder()->first()->getPhoto()
@@ -68,7 +69,7 @@ class Meetings extends Model
                 'blog_id' => $meeting->blog_id,
                 'link' => $meeting->link,
                 'title' => Blog::find($meeting->blog_id)->title,
-                'date' => $meeting->scheduled,
+                'date' => Carbon::createFromFormat('Y-m-d H:i:s', $meeting->scheduled)->format('Y F d H:i'),
                 'participants' => BlogParticipate::where('blog_id', $meeting->blog_id)->count(),
                 'status' => (strtotime($meeting->scheduled) > time()) ? 'scheduled' : 'happening',
                 'cover' => BlogImages::where('blog_id', $meeting->blog_id)->inRandomOrder()->first()->getPhoto()

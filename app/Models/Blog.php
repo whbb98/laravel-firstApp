@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -115,7 +116,7 @@ class Blog extends Model
             $filtered =  [
                 'blog_id' => $blog->id,
                 'title' => $blog->title,
-                'datetime' => $blog->datetime,
+                'datetime' => Carbon::createFromFormat('Y-m-d H:i:s', $blog->datetime)->format('Y F d H:i'),
                 'participants' => BlogParticipate::where('blog_id', $blog->id)->count(),
                 'commentsCount' => 12,
                 'status' => 'mine',
@@ -137,7 +138,7 @@ class Blog extends Model
             $filtered =  [
                 'blog_id' => $blog->id,
                 'title' => $blog->title,
-                'datetime' => $blog->datetime,
+                'datetime' => Carbon::createFromFormat('Y-m-d H:i:s', $blog->datetime)->format('Y F d H:i'),
                 'participants' => BlogParticipate::where('blog_id', $blog->id)->count(),
                 'commentsCount' => 12,
                 'status' => BlogParticipate::where('blog_id', $blog->id)->where('user_id', $user->id)->value('status'),
