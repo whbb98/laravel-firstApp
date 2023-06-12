@@ -147,9 +147,7 @@ Route::get(
 // <<<<<<<<<<<<<<<<<<<<<<<<<< User Network Routes
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>> Blog Routes
-Route::get("/blogs", function () {
-    return view("user.blogs");
-})->middleware("CheckLogin")->name("blogs");
+Route::get("/blogs", [BlogController::class, "fetchBlogs"])->middleware("CheckLogin")->name("blogs");
 
 Route::get("/blog/{id}", [BlogController::class, "accessBlog"])->middleware("CheckLogin");
 

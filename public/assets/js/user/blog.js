@@ -16,6 +16,7 @@ function nextImage() {
         currentImage = 1;
     }
     showImage(currentImage);
+    console.log($("#img-" + currentImage).data("imgid"));
     $("#slider_count").text(currentImage + " / " + totalImages);
 }
 function prevImage() {
@@ -122,10 +123,10 @@ for (const annoItem of anno[0]) {
     });
 }
 // >>>>>>>>>>>>>>>>>>>>>> fetching annotations
-renderAnnotations();
-
+// renderAnnotations();
 // >>>>>>>>>>>>>>>>< filtering annotations by user
 $('ul').on('click', 'li', function () {
+    // console.log($(this).data("userid"));
     $(this).parent().children().removeClass("active");
     $(this).addClass("active");
     currentUser = parseInt($(this).attr("id").split("-")[1]) - 1;

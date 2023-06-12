@@ -27,24 +27,40 @@ class BlogController extends Controller
         if (!$blog) {
             return redirect()->route("blogs");
         }
-        // Carbon::createFromFormat('Y-m-d H:i:s', $blog->datetime)->format('Y F d H:i');
         $datetime = Carbon::createFromFormat('Y-m-d H:i:s', $blog->datetime);
         $blog->datetime = $datetime->format('Y F d H:i');
         $participants = $blog->blogParticipants;
         $participantsID = [];
+        $participantsID[] = $blog->user_id;
         foreach ($participants as $p) {
             $participantsID[] = $p->user_id;
         }
-
         if ($user->id != $blog->user_id && !in_array($user->id, $participantsID)) {
             return redirect()->route("blogs");
         }
-
+        $participantsList = User::whereIn('id', $participantsID)->get();
+        $users = [];
+        foreach ($participantsList as $participant) {
+            if ($participant->id != session('userid')) {
+                $users[] = $participant;
+            }
+        }
         return view("user.blog", [
             "id" => $id,
-            "participants" => $participantsID,
+            "user" => $user,
             "blog" => $blog,
-            "user" => $user
+            "users" => $users,
+            "images" => $blog->blogImages
+        ]);
+    }
+
+    public function fetchBlogs(Request $request)
+    {
+        $userBlogs = Blog::fetchUserBlogs();
+        $participateBlogs = Blog::fetchParticipateBlogs();
+        return view("user.blogs", [
+            "userBlogs" => $userBlogs,
+            "participateBlogs" => $participateBlogs
         ]);
     }
 

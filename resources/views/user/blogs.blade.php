@@ -1,11 +1,8 @@
 @extends('layout.user-page')
 @section('title', 'Blogs')
 @php
-    use App\Models\Blog;
     $active_page_number = 5;
     $favicon_url = 'assets/favicons/blog-icon.svg';
-    $userBlogs = Blog::fetchUserBlogs();
-    $participateBlogs = Blog::fetchParticipateBlogs();
 @endphp
 
 
@@ -151,7 +148,7 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <span><i class="fa-solid fa-user-group"></i>
-                        {{ $blog['participants'] }}
+                        {{ $blog['participants']}}
                     </span>
                     <span><i class="fa-solid fa-message"></i>
                         {{ $blog['commentsCount'] }}

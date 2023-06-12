@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-@php
-
-@endphp
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,16 +26,16 @@
         <div class="mt-5 blog text-custom-dark">
             <div class="blog-header">
                 <h3 class="mb-3">
-                    {{$blog->title}}
+                    {{ $blog->title }}
                 </h3>
                 <div class="mb-4">
                     <span class="fs-5 fw-bold me-5 text-capitalize">
                         <i class="fa-solid fa-user-doctor"></i>
-                        {{$blog->user->first_name ." ". $blog->user->last_name}}
+                        {{ $blog->user->first_name . ' ' . $blog->user->last_name }}
                     </span>
                     <span class="fs-5 fw-bold">
                         <i class="fa-solid fa-calendar-days"></i>
-                        {{$blog->datetime}}
+                        {{ $blog->datetime }}
                     </span>
                 </div>
             </div>
@@ -52,22 +49,22 @@
                     </div>
                     <ul id="users-list" class="list-unstyled">
                         {{-- me --}}
-                        <li id="user-1" data-userid="1998" class="mb-2 rounded active">
-                            <img src="{{$user->profile->getPhoto()}}"
-                                title="user 1" class="rounded-circle">
+                        <li id="user-1" data-userid="{{ $user->id }}" class="mb-2 rounded active">
+                            <img src="{{ $user->profile->getPhoto() }}" title="{{ $user->first_name }}"
+                                class="rounded-circle">
                             &nbsp;
-                            <span class="d-none d-md-block">
+                            <span class="d-none d-md-block text-capitalize">
                                 {{ $user->first_name }}
                             </span>
                         </li>
                         {{-- blog participants --}}
-                        @for ($i = 2; $i < 5; $i++)
-                            <li id="user-{{ $i }}" data-userid="{{ $i * 10 }}" class="mb-2 rounded">
-                                <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
-                                    title="user {{ $i }}" class="rounded-circle">
+                        @for ($i = 0; $i < count($users); $i++)
+                            <li id="user-{{ $i + 2 }}" data-userid="{{ $users[$i]->id }}" class="mb-2 rounded">
+                                <img src="{{ $users[$i]->profile->getPhoto() }}" title="{{ $users[$i]->first_name }}"
+                                    class="rounded-circle">
                                 &nbsp;
-                                <span class="d-none d-md-block">
-                                    user {{ $i }}
+                                <span class="d-none d-md-block text-capitalize">
+                                    {{ $users[$i]->first_name . ' ' . $users[$i]->last_name }}
                                 </span>
                             </li>
                         @endfor
@@ -76,9 +73,9 @@
                 </div>
                 <div class="blog-slider bg-custom-secondary col rounded-end">
                     <div id="img-slider" class="image-slider">
-                        @for ($i = 1; $i < 5; $i++)
-                            <img id="img-{{ $i }}" data-imgID="{{ $i * 10 }}"
-                                {{ $url = asset('mock/xray/img (') . $i . ').png' }} src="{{ $url }}">
+                        @for ($i = 0; $i < count($images); $i++)
+                            <img id="img-{{ $i + 1 }}" data-imgid="{{ $images[$i]->id }}"
+                                data-blogid="{{ $images[$i]->blog_id }}" src="{{ $images[$i]->getPhoto() }}">
                         @endfor
                     </div>
                     <div class="slider-nav row">
@@ -121,7 +118,7 @@
             </div>
             <div class="description mt-5">
                 <h4>Description</h4>
-                <p class="lead">{{$blog->description}}</p>
+                <p class="lead">{{ $blog->description }}</p>
             </div>
             {{-- ----------------AI Predictions ----------------- --}}
             <div class="ai-predictions p-2 rounded" data-bs-toggle="collapse" data-bs-target="#ai-predictions">
