@@ -35,7 +35,7 @@ class BlogController extends Controller
         foreach ($participants as $p) {
             $participantsID[] = $p->user_id;
         }
-        if ($user->id != $blog->user_id && !in_array($user->id, $participantsID)) {
+        if (!$blog->getBlogAccess()) {
             return redirect()->route("blogs");
         }
         $participantsList = User::whereIn('id', $participantsID)->get();

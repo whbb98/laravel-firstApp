@@ -28,4 +28,15 @@ class UserAnnotations extends Model
     {
         return $this->belongsTo(BlogImages::class);
     }
+
+    public function getAnnotation()
+    {
+        return $this->annotation;
+    }
+
+    public function setAnnotation($anno)
+    {
+        $this->annotation = $anno;
+        return $this->save();
+    }
 }

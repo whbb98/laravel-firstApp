@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,13 +16,13 @@
     {{-- ----------------------------------------------------- --}}
     <link rel="stylesheet" href="{{ asset('assets/css/global.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/blog.css') }}">
+    {{-- <script defer src="{{ asset('assets/js/user/blog.js') }}"></script> --}}
     <script defer src="{{ asset('assets/js/user/blog.js') }}"></script>
     <link rel="icon" type="image/x-icon" href="/assets/favicons/blog-icon.svg">
     <title>Blog View {{ $id }}</title>
 </head>
 
 <body>
-
     <div class="container">
         <div class="mt-5 blog text-custom-dark">
             <div class="blog-header">
@@ -49,7 +50,7 @@
                     </div>
                     <ul id="users-list" class="list-unstyled">
                         {{-- me --}}
-                        <li id="user-1" data-userid="{{ $user->id }}" class="mb-2 rounded active">
+                        <li id="user-0" data-user_id="{{ $user->id }}" class="mb-2 rounded active">
                             <img src="{{ $user->profile->getPhoto() }}" title="{{ $user->first_name }}"
                                 class="rounded-circle">
                             &nbsp;
@@ -59,7 +60,8 @@
                         </li>
                         {{-- blog participants --}}
                         @for ($i = 0; $i < count($users); $i++)
-                            <li id="user-{{ $i + 2 }}" data-userid="{{ $users[$i]->id }}" class="mb-2 rounded">
+                            <li id="user-{{ $i + 1 }}" data-user_id="{{ $users[$i]->id }}"
+                                class="mb-2 rounded">
                                 <img src="{{ $users[$i]->profile->getPhoto() }}" title="{{ $users[$i]->first_name }}"
                                     class="rounded-circle">
                                 &nbsp;
@@ -73,9 +75,10 @@
                 </div>
                 <div class="blog-slider bg-custom-secondary col rounded-end">
                     <div id="img-slider" class="image-slider">
+                        @csrf
                         @for ($i = 0; $i < count($images); $i++)
-                            <img id="img-{{ $i + 1 }}" data-imgid="{{ $images[$i]->id }}"
-                                data-blogid="{{ $images[$i]->blog_id }}" src="{{ $images[$i]->getPhoto() }}">
+                            <img id="img-{{ $i }}" data-image_id="{{ $images[$i]->id }}"
+                                data-blog_id="{{ $images[$i]->blog_id }}" src="{{ $images[$i]->getPhoto() }}">
                         @endfor
                     </div>
                     <div class="slider-nav row">

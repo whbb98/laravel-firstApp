@@ -148,4 +148,20 @@ class Blog extends Model
         }
         return $filteredBlogs;
     }
+
+    public function getBlogAccess()
+    {
+        $user = User::find(session('userid'));
+        $participants = $this->blogParticipants;
+        $participantsID = [];
+        $participantsID[] = $this->user_id;
+        foreach ($participants as $p) {
+            $participantsID[] = $p->user_id;
+        }
+        if ($user->id != $this->user_id && !in_array($user->id, $participantsID)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

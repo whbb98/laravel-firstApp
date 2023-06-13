@@ -7,9 +7,9 @@ use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NotificationSettingsController;
+use App\Http\Controllers\UserAnnotationsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserNetworkController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -159,6 +159,16 @@ Route::post(
 Route::get(
     "/blogs/suggestParticipants",
     [BlogController::class, "suggestParticipants"]
+)->middleware("CheckLogin");
+
+Route::get(
+    "/fetchAnnotation",
+    [UserAnnotationsController::class, "fetchAnnotation"]
+)->middleware("CheckLogin");
+
+Route::post(
+    "/storeAnnotation",
+    [UserAnnotationsController::class, "storeAnnotation"]
 )->middleware("CheckLogin");
 // <<<<<<<<<<<<<<<<<<<<<<<<<<< Blog Routes
 
