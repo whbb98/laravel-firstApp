@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\BlogFeedback;
 use App\Models\BlogImages;
 use App\Models\BlogParticipate;
 use App\Models\Meetings;
@@ -102,6 +103,9 @@ class BlogController extends Controller
                         return redirect()->back()->with('error', 'Meeting date must be in Future')->withInput();
                     }
                 }
+                // insert blog feed back row
+                $blogFeedback = new BlogFeedback();
+                $blogFeedback->createFeedback($blog->id);
                 // inserting image files 
                 foreach ($request->file('files') as $file) {
                     $blogImages = new BlogImages();
