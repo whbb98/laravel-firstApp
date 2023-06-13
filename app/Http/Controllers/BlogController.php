@@ -38,6 +38,7 @@ class BlogController extends Controller
         if (!$blog->getBlogAccess()) {
             return redirect()->route("blogs");
         }
+
         $participantsList = User::whereIn('id', $participantsID)->get();
         $users = [];
         foreach ($participantsList as $participant) {

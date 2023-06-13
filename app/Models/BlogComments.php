@@ -28,4 +28,13 @@ class BlogComments extends Model
     {
         return $this->belongsTo(User::class, 'replied_to');
     }
+
+    public function createComment($blogid, $content)
+    {
+        $this->user_id = session('userid');
+        $this->blog_id = $blogid;
+        $this->content = $content;
+        $this->datetime = now();
+        return $this->save();
+    }
 }

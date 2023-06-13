@@ -198,7 +198,11 @@
                                     @for ($i = 0; $i < 5; $i++)
                                         <tr>
                                             <td>
-                                                <input id="choice-{{ $i }}" disabled
+                                                <input id="choice-{{ $i }}" 
+                                                @if ($i==2)
+                                                    checked
+                                                @endif
+                                                disabled
                                                     class="form-check-input" type="radio" name="choice"
                                                     value="1">
                                             </td>
