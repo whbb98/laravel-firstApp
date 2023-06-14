@@ -186,7 +186,7 @@
                 <form>
                     <div class="row">
                         <div class="col-md-12">
-                            <table id="feedback_table" class="table feedback">
+                            <table id="feedback_table" data-blog_id="{{ $blog->id }}" class="table feedback">
                                 <thead>
                                     <tr>
                                         <th class="col-2">Choice</th>
@@ -198,11 +198,8 @@
                                     @for ($i = 0; $i < 5; $i++)
                                         <tr>
                                             <td>
-                                                <input id="choice-{{ $i }}" 
-                                                @if ($i==2)
-                                                    checked
-                                                @endif
-                                                disabled
+                                                <input id="choice-{{ $i }}"
+                                                    @if ($i == 2) checked @endif disabled
                                                     class="form-check-input" type="radio" name="choice"
                                                     value="1">
                                             </td>
@@ -238,35 +235,14 @@
             <h4 class="mt-5">Comments</h4>
             <div class="blog-comments p-3 rounded">
                 {{-- +++++++++++++++++++++++++++++++ --}}
-                <div class="row">
-                    @for ($i = 0; $i < 10; $i++)
-                        <div class="col-md-12">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <img src="https://pbs.twimg.com/profile_images/1611475898255003659/ZIWZ4ys9_400x400.jpg"
-                                        width="50px" height="50px"
-                                        class="img-fluid rounded-circle float-start me-3" alt="User Image">
-                                    <h5 class="card-title">John Doe</h5>
-                                    <p class="card-subtitle mb-2 text-muted">June 1, 2023</p>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Nullam
-                                        varius magna ut
-                                        tincidunt scelerisque. Proin rhoncus, lectus vel porta semper, urna nunc
-                                        pharetra
-                                        orci, sed finibus
-                                        neque lacus a felis.</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endfor
+                <div id="blog-comments" class="row">
                 </div>
                 {{-- ------------------------------- --}}
             </div>
-            <form class="comment-form mt-2" action="">
+            <form id="form-comment" class="comment-form mt-2">
                 <div class="input-group mb-4">
-                    <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Your
-                        Comment</span>
-                    <input name="comment" type="text" class="form-control" placeholder="Write Your Comment">
+                    <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Your Comment</span>
+                    <input id="comment" name="comment" type="text" class="form-control" placeholder="Write Your Comment">
                 </div>
             </form>
         </div>

@@ -169,7 +169,7 @@ function storeAnnotation(/*callback*/) {
         },
         data: JSON.stringify(requestBody),
         success: function (response) {
-            console.log("Store Annotation status: "+response);
+            console.log("Store Annotation status: " + response);
             // callback();
         },
         error: function (xhr, status, error) {
@@ -184,3 +184,80 @@ function renderAnnotation(jsonData) {
     anno.setAnnotations(jsonData);
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> blog comments >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+function renderComment(commentObj) {
+    const comment = `<div class="col-md-12">
+            <div class="card mb-3" data-userid="${commentObj.userid}">
+                <div class="card-body">
+                    <img src="${commentObj.photo}"
+                        style="width:60px;height:60px;object-fit: cover"
+                        class="img-fluid rounded-circle float-start me-3" title="${commentObj.username}">
+                    <h5 class="card-title text-capitalize">${commentObj.username}</h5>
+                    <p class="card-subtitle mb-2 text-muted">
+                    ${commentObj.datetime}
+                    </p>
+                    <p class="card-text">${commentObj.comment}</p>
+                </div>
+            </div>
+        </div>`;
+    $('#blog-comments').append(comment);
+}
+
+function fetchAllComments(callback) {
+    const obj = getCurrentData();
+    $.ajax({
+        url: `http://doctoraicollab.test/fetchAllComments?blog_id=${obj.blog_id}`,
+        type: "GET",
+        success: function (response) {
+            $('#blog-comments').html('');
+            blogComments = JSON.parse(response);
+            for (const comment of blogComments) {
+                renderComment(comment);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("Error: " + error);
+        }
+    });
+}
+
+function insertComment(commentText) {
+    const obj = getCurrentData();
+    const requestBody = {
+        blog_id: obj.blog_id,
+        content: commentText,
+    };
+    $.ajax({
+        url: "http://doctoraicollab.test/insertBlogComment",
+        type: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            "X-CSRF-Token": $('input[name="_token"]').val()
+        },
+        data: JSON.stringify(requestBody),
+        success: function (response) {
+            console.log("insert comment status: " + response);
+            fetchAllComments(renderComment);
+            $('#form-comment #comment').val('');
+        },
+        error: function (xhr, status, error) {
+            console.log("Error: " + error);
+        }
+    });
+}
+
+$('#form-comment').submit(function (e) {
+    e.preventDefault();
+    commentText = ($('#comment').val());
+    insertComment(commentText);
+});
+
+// Fetching Blog Comments when After Page Loading
+fetchAllComments(renderComment);
+
+// Fetching Blog Comments Regularly
+// setInterval(function () { fetchAllComments(renderComment) }, 1000);
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< blog comments <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

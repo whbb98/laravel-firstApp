@@ -32,4 +32,9 @@ class BlogFeedback extends Model
         $this->labels = json_encode($this->xray_classes);
         return $this->save();
     }
+
+    public function getAllFeedbackData()
+    {
+        return $this->feedbackData;
+    }
 }

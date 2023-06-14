@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogCommentsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\testing;
@@ -161,6 +162,7 @@ Route::get(
     [BlogController::class, "suggestParticipants"]
 )->middleware("CheckLogin");
 
+// Annotations route
 Route::get(
     "/fetchAnnotation",
     [UserAnnotationsController::class, "fetchAnnotation"]
@@ -169,6 +171,16 @@ Route::get(
 Route::post(
     "/storeAnnotation",
     [UserAnnotationsController::class, "storeAnnotation"]
+)->middleware("CheckLogin");
+// Blog Comments Route
+Route::get(
+    "/fetchAllComments",
+    [BlogCommentsController::class, "fetchAllComments"]
+)->middleware("CheckLogin");
+
+Route::post(
+    "/insertBlogComment",
+    [BlogCommentsController::class, "insertComment"]
 )->middleware("CheckLogin");
 // <<<<<<<<<<<<<<<<<<<<<<<<<<< Blog Routes
 

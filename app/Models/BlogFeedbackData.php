@@ -23,4 +23,11 @@ class BlogFeedbackData extends Model
     {
         return $this->belongsTo(User::class, 'voted_by');
     }
+
+    public function updateFeedback($answer)
+    {
+        $this->answer = $answer;
+        $this->datetime = now();
+        return $this->save();
+    }
 }
