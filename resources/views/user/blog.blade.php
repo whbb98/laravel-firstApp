@@ -134,7 +134,7 @@
                     <i hidden class="fa-solid fa-circle-chevron-up"></i>
                 </span>
             </div>
-            <div class="collapse" id="ai-predictions">
+            <div id="ai-predictions" class="collapse">
                 {{-- ++++++++++++++++++++++++++++++++++++++++++ --}}
                 <div class="row">
                     <div class="col-md-12">
@@ -147,24 +147,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($i = 0; $i < 5; $i++)
-                                    <tr>
-                                        <td class="fw-bold">Covid</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-custom-primary" role="progressbar"
-                                                    style="width: 50%;">50%</div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-custom-primary" role="progressbar"
-                                                    style="width: 90%;">90%
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endfor
+                                {{-- this will be inserted by js using fetchPredictions --}}
                             </tbody>
                         </table>
                     </div>

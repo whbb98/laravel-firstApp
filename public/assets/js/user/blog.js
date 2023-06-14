@@ -37,6 +37,7 @@ function nextImage() {
     anno.setVisible(annoVisibility);
     addAnnoEvents(anno);
     fetchAnnotation(renderAnnotation);
+    fetchPredictions(renderPredictions);
 }
 
 function prevImage() {
@@ -55,6 +56,7 @@ function prevImage() {
     anno.setVisible(annoVisibility);
     addAnnoEvents(anno);
     fetchAnnotation(renderAnnotation);
+    fetchPredictions(renderPredictions);
 }
 
 $('#img-slider img').first().show();
@@ -254,10 +256,54 @@ $('#form-comment').submit(function (e) {
     insertComment(commentText);
 });
 
-// Fetching Blog Comments when After Page Loading
+// Fetching Blog Comments After Page Loading
 fetchAllComments(renderComment);
 
 // Fetching Blog Comments Regularly
 // setInterval(function () { fetchAllComments(renderComment) }, 1000);
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< blog comments <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Blog AI Predictions >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+function renderPredictions(predictions) {
+    const tbody = $('#ai-predictions table tbody');
+    tbody.html('');
+    for (const key in predictions) {
+        const row = `<tr>
+                    <td class="fw-bold">${key}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar bg-custom-primary" role="progressbar"
+                                style="width: ${predictions[key]}%;">${predictions[key]}%</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar bg-custom-primary" role="progressbar"
+                                style="width: 20%;">20%
+                            </div>
+                        </div>
+                    </td>
+                </tr>`;
+        tbody.append(row);
+    }
+}
+
+function fetchPredictions(callback) {
+    const obj = getCurrentData();
+    $.ajax({
+        url: `http://api.doctoraicollab.test:5000/predict?id=${obj.image_id}`,
+        type: "GET",
+        success: function (response) {
+            callback(response);
+        },
+        error: function (xhr, status, error) {
+            console.log("Not Found");
+        }
+    });
+}
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Blog AI Predictions <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+// Fetching Predictions for selected Image After Page Loading
+fetchPredictions(renderPredictions);
+
