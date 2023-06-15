@@ -178,35 +178,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for ($i = 0; $i < 5; $i++)
-                                        <tr>
-                                            <td>
-                                                <input id="choice-{{ $i }}"
-                                                    @if ($i == 2) checked @endif disabled
-                                                    class="form-check-input" type="radio" name="choice"
-                                                    value="1">
-                                            </td>
-                                            <td>
-                                                <label class="form-check-label text-muted fw-bold"
-                                                    for="choice-{{ $i }}">
-                                                    Covid
-                                                </label>
-                                            </td>
-                                            <td>
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-custom-primary" role="progressbar"
-                                                        style="width: 90%;">
-                                                        90%
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endfor
+                                    {{-- will be populated by js --}}
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-custom-primary text-white rounded">
+                    <button id="feedback-vote-btn" type="submit" disabled class="btn btn-custom-primary text-white rounded">
                         Vote
                     </button>
                     <button id="feedback-edit-btn" type="button" class="btn btn-outline-custom-primary rounded">
@@ -225,7 +202,8 @@
             <form id="form-comment" class="comment-form mt-2">
                 <div class="input-group mb-4">
                     <span class="input-group-text bg-custom-secondary text-custom-primary fw-bold">Your Comment</span>
-                    <input id="comment" name="comment" type="text" class="form-control" placeholder="Write Your Comment">
+                    <input id="comment" name="comment" type="text" class="form-control"
+                        placeholder="Write Your Comment">
                 </div>
             </form>
         </div>

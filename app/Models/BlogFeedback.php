@@ -14,7 +14,7 @@ class BlogFeedback extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps = false;
-    private $xray_classes = '{"0":"Atelectasis","1":"Cardiomegaly","2":"Effusion","3":"Infiltration","4":"Mass","5":"Nodule","6":"Pneumonia","7":"Pneumothorax","8":"Consolidation","9":"Edema","10":"Emphysema","11":"Fibrosis","12":"Pleural_Thickening","13":"Hernia","14":"other"}';
+    private $xray_classes = '{"0":"Atelectasis","1":"Cardiomegaly","2":"Effusion","3":"Infiltration","4":"Mass","5":"Nodule","6":"Pneumonia","7":"Pneumothorax","8":"Consolidation","9":"Edema","10":"Emphysema","11":"Fibrosis","12":"Pleural_Thickening","13":"Hernia","14":"Other"}';
 
     public function blog(): BelongsTo
     {

@@ -306,4 +306,181 @@ function fetchPredictions(callback) {
 
 // Fetching Predictions for selected Image After Page Loading
 fetchPredictions(renderPredictions);
+// ----------------------------------------------------------
 
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Blog User Feed Back >>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+$('#feedback-edit-btn').click(function (e) {
+    e.preventDefault();
+    $('#feedback_table input').prop('disabled', false);
+    $('#feedback-vote-btn').prop('disabled', false);
+});
+
+$('#feedback-vote-btn').click(function (e) {
+    $('form').submit(function (e) {
+        e.preventDefault();
+        const selectedValue = $('input[name="choice"]:checked').val();
+        const obj = getCurrentData();
+        const requestBody = {
+            blog_id: obj.blog_id,
+            answer: selectedValue
+        };
+        $.ajax({
+            url: "http://doctoraicollab.test/insertUserVote",
+            type: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRF-Token": $('input[name="_token"]').val()
+            },
+            data: JSON.stringify(requestBody),
+            success: function (response) {
+                if (response == 1) {
+                    fetchRenderFeedback();
+                    $('#feedback-vote-btn').prop('disabled', true);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error: " + error);
+            }
+        });
+    });
+});
+
+// function storeAnnotation(/*callback*/) {
+//     $.ajax({
+//         url: "http://doctoraicollab.test/storeAnnotation",
+//         type: "POST",
+//         headers: {
+//             'Content-Type': 'application/json',
+//             "X-CSRF-Token": $('input[name="_token"]').val()
+//         },
+//         data: JSON.stringify(requestBody),
+//         success: function (response) {
+//             console.log("Store Annotation status: " + response);
+//             // callback();
+//         },
+//         error: function (xhr, status, error) {
+//             console.log("Error: " + error);
+//         }
+//     });
+// }
+
+function renderFeedbackData(userVoted, voteResults) {
+    const feedbackTable = $('#feedback_table tbody');
+    feedbackTable.html('');
+    for (const vote of voteResults) {
+        let checked = (vote.index == userVoted) ? 'checked' : '';
+        const row = `<tr>
+                        <td>
+                            <input id="choice-${vote.index}" ${checked} disabled
+                                class="form-check-input" type="radio" name="choice"
+                                value="${vote.index}">
+                        </td>
+                        <td>
+                            <label class="form-check-label text-muted fw-bold"
+                                for="choice-${vote.index}">
+                                ${vote.label}
+                            </label>
+                        </td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar bg-custom-primary" role="progressbar"
+                                    style="width: ${vote.ratio}%">
+                                    ${vote.ratio}%
+                                </div>
+                            </div>
+                        </td>
+                    </tr>`;
+        feedbackTable.append(row);
+    }
+}
+
+function fetchUserVoted() {
+    return new Promise((resolve, reject) => {
+        const obj = getCurrentData();
+        $.ajax({
+            url: `http://doctoraicollab.test/fetchUserVote?blog_id=${obj.blog_id}`,
+            type: "GET",
+            success: function (response) {
+                resolve(response);
+            },
+            error: function (xhr, status, error) {
+                reject("Not Found");
+            }
+        });
+    });
+
+}
+
+function fetchFeedbackLabels(voted) {
+    return new Promise((resolve, reject) => {
+        const obj = getCurrentData();
+        $.ajax({
+            url: `http://doctoraicollab.test/fetchFeedbackLabels?blog_id=${obj.blog_id}`,
+            type: "GET",
+            success: function (response) {
+                const labels = JSON.parse(response);
+                const voteObj = {
+                    selected: voted,
+                    labels: labels
+                }
+                // console.log(voteObj);
+                resolve(voteObj);
+            },
+            error: function (xhr, status, error) {
+                reject("Not Found");
+            }
+        });
+    });
+
+}
+
+function fetchFeedbackData(voteObj) {
+    return new Promise((resolve, reject) => {
+        const obj = getCurrentData();
+        $.ajax({
+            url: `http://doctoraicollab.test/fetchFeedbackData?blog_id=${obj.blog_id}`,
+            type: "GET",
+            success: function (response) {
+                const answerCount = new Array(15).fill(0);
+                for (let i = 0; i < 15; i++) {
+                    for (const vote of response) {
+                        if (vote.answer === i) {
+                            answerCount[i]++;
+                        }
+                    }
+                }
+                const votePercentage = answerCount.map(x => Math.floor(x / totalUsers * 100));
+                const voteResults = [];
+                for (let i = 0; i < votePercentage.length; i++) {
+                    const obj = {
+                        index: i,
+                        label: voteObj.labels[i],
+                        ratio: votePercentage[i]
+                    }
+                    voteResults.push(obj);
+                }
+                voteObj.voteResults = voteResults;
+                resolve(voteObj);
+            },
+            error: function (xhr, status, error) {
+                reject("Not Found");
+            }
+        });
+    });
+
+}
+// -----------------------------------------------------------------------------------------------
+// fetching feedback data (vote racords)
+function fetchRenderFeedback() {
+    fetchUserVoted()
+        .then((voted) => fetchFeedbackLabels(voted))
+        .then((voteObj) => fetchFeedbackData(voteObj))
+        .then((voteObj) => {
+            renderFeedbackData(voteObj.selected, voteObj.voteResults);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
+fetchRenderFeedback();
+// -----------------------------------------------------------------------------------------------

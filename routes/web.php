@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogCommentsController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BlogFeedbackController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\testing;
 use App\Http\Controllers\UserAuthController;
@@ -162,7 +163,8 @@ Route::get(
     [BlogController::class, "suggestParticipants"]
 )->middleware("CheckLogin");
 
-// Annotations route
+// Annotations routes
+
 Route::get(
     "/fetchAnnotation",
     [UserAnnotationsController::class, "fetchAnnotation"]
@@ -172,7 +174,9 @@ Route::post(
     "/storeAnnotation",
     [UserAnnotationsController::class, "storeAnnotation"]
 )->middleware("CheckLogin");
+
 // Blog Comments Route
+
 Route::get(
     "/fetchAllComments",
     [BlogCommentsController::class, "fetchAllComments"]
@@ -181,6 +185,27 @@ Route::get(
 Route::post(
     "/insertBlogComment",
     [BlogCommentsController::class, "insertComment"]
+)->middleware("CheckLogin");
+
+// Blog Feedback Routes
+Route::get(
+    "/fetchUserVote",
+    [BlogFeedbackController::class, "fetchUserVote"]
+)->middleware("CheckLogin");
+
+Route::get(
+    "/fetchFeedbackData",
+    [BlogFeedbackController::class, "fetchFeedbackData"]
+)->middleware("CheckLogin");
+
+Route::get(
+    "/fetchFeedbackLabels",
+    [BlogFeedbackController::class, "fetchFeedbackLabels"]
+)->middleware("CheckLogin");
+
+Route::post(
+    "/insertUserVote",
+    [BlogFeedbackController::class, "insertUserVote"]
 )->middleware("CheckLogin");
 // <<<<<<<<<<<<<<<<<<<<<<<<<<< Blog Routes
 

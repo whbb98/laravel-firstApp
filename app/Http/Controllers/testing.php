@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\BlogFeedback;
 use App\Models\BlogImages;
 use App\Models\BlogParticipate;
 use App\Models\Meetings;
@@ -15,13 +16,13 @@ class testing extends Controller
 {
     public function test(Request $request)
     {
-        $blog = Blog::find(18);
-        // $blogImages = BlogImages::where('blog_id', 16)->inRandomOrder()->first()->getPhoto();
-        $blogImages = $blog->blogImages;
+        $blog = Blog::find(1);
+        $feedback = $blog->blogFeedback->labels;
         // echo "<pre>";
-        foreach ($blogImages as $image) {
-            echo $image->image_name . '<hr>';
-            // echo $image->id ." <img width='100' height='150' src='".$image->getPhoto()."'>" . "<br>";
-        }
+        $test =  json_decode($feedback);
+        echo var_dump($test);
+        // foreach ($feedback as $image) {
+
+        // }
     }
 }

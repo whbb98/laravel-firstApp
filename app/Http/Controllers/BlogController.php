@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\BlogFeedback;
+use App\Models\BlogFeedbackData;
 use App\Models\BlogImages;
 use App\Models\BlogParticipate;
 use App\Models\Meetings;
@@ -47,6 +48,7 @@ class BlogController extends Controller
                 $users[] = $participant;
             }
         }
+
         return view("user.blog", [
             "id" => $id,
             "user" => $user,
