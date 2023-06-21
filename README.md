@@ -16,56 +16,64 @@ In addition to that they can read AI predictions for each image which helps them
 **Check the link of deployed model** [Flask-App Github Repo](https://github.com/whbb98/flask-firstApp)
 
 ---
+
 ## **What can a doctor do ?**
-* Create an acount then login
-* Browse available blogs, scheduled meetings
-* Find other users (name, city, occupation, hospital)
-* Edit personal profile 
-* **Create a Blog** (diagnosis problem)
-    * title
-    * description
-    * invite participants (doctors)
-    * schedule a meeting (**external link**)
-    * upload images (chast x-ray images)
-* **Inside the blog**
-    * Navigate the images slider
-    * Annotate each Image (add notes, tags)
-    * Watch other doctors annotations
-    * Watch AI Predictions for the current image on the slider
-    * Vote on the most probable disease (14 pulmonary disease)
-    * Comment to other doctors
+
+-   Create an acount then login
+-   Browse available blogs, scheduled meetings
+-   Find other users (name, city, occupation, hospital)
+-   Edit personal profile
+-   **Create a Blog** (diagnosis problem)
+    -   title
+    -   description
+    -   invite participants (doctors)
+    -   schedule a meeting (**external link**)
+    -   upload images (chast x-ray images)
+-   **Inside the blog**
+    -   Navigate the images slider
+    -   Annotate each Image (add notes, tags)
+    -   Watch other doctors annotations
+    -   Watch AI Predictions for the current image on the slider
+    -   Vote on the most probable disease (14 pulmonary disease)
+    -   Comment to other doctors
+
 ---
+
 ## **Development Environment**
 
 **Frontend**
-- Html
-- Css
-- Js
-- JQuery
-- Bootstrap 5
-- [Annotorious](https://annotorious.github.io/) (for image annotations)
+
+-   Html
+-   Css
+-   Js
+-   JQuery
+-   Bootstrap 5
+-   [Annotorious](https://annotorious.github.io/) (for image annotations)
 
 **Backend**
 
-- Laravel 10 including (Elequent ORM, Blade)
-- php v8.1
-- Mysql database
+-   Laravel 10 including (Elequent ORM, Blade)
+-   php v8.1
+-   Mysql database
 
+## **Web-app Limits (not implemented yet)**
 
-## **Web-app Limts (not implemented yet)**
-* Realtime Notifications
-* (Friendship) Follow/Unfollow
-* Messaging other users
+-   Realtime Notifications
+-   (Friendship) Follow/Unfollow
+-   Messaging other users
 
 ## **Future Work**
-* Improve the DL model accuracy
-* Add another DL model for image annotations
+
+-   breaking web-app Limits ;)
+-   Improve the DL model accuracy
+-   Add another DL model for image annotations
 
 > The database file is included in "/README/**database_design.mwb**" which you can create it in your local pc using mysql workbensh (Forward Engineering).
 
 > Thanks for reading
 
 ## **Screenshots**
+
 **Home**
 ![home](README/images/home.png)
 **Profile**
