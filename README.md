@@ -13,6 +13,8 @@ In addition to that they can read AI predictions for each image which helps them
 
 > Since I used a dataset of pneumorax diseases, then doctors of penumology field can use it, as well as others can use it normal
 
+> The database file is included in "/README/**database_design.mwb**" which you can create it in your local pc using mysql workbensh (Forward Engineering).
+
 **Check the link of deployed model** [Flask-App Github Repo](https://github.com/whbb98/flask-firstApp)
 
 ---
@@ -67,8 +69,6 @@ In addition to that they can read AI predictions for each image which helps them
 -   breaking web-app Limits ;)
 -   Improve the DL model accuracy
 -   Add another DL model for image annotations
-
-> The database file is included in "/README/**database_design.mwb**" which you can create it in your local pc using mysql workbensh (Forward Engineering).
 
 > Thanks for reading
 
